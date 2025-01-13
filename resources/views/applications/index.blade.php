@@ -39,6 +39,10 @@
                             <td>{{ $application->pemilik }}</td>
                             <td>{{ $application->pengembang }}</td>
                             <td class="text-center">
+                                <a href="{{ route('applications.catalog', $application->id) }}"
+                                    class="btn btn-sm btn-primary" data-tippy-content="Katalog Aplikasi">
+                                    <i class="bi bi-book"></i>
+                                </a>
                                 <a href="{{ route('applications.edit', $application->id) }}"
                                     class="btn btn-sm btn-warning" data-tippy-content="Edit Aplikasi">
                                     <i class="bi bi-pencil"></i>

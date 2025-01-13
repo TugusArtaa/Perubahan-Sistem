@@ -8,6 +8,10 @@ use App\Http\Controllers\DashboardController;
 // Rute untuk resource applications
 Route::resource('applications', ApplicationController::class);
 
+// Rute untuk katalog aplikasi
+Route::get('applications/{application}/catalog', [ApplicationController::class, 'catalog'])->name('applications.catalog');
+Route::get('applications/{application}/download-pdf', [ApplicationController::class, 'downloadPdf'])->name('applications.downloadPdf');
+
 // Rute untuk dashboard
 Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
@@ -16,7 +20,7 @@ Route::prefix('applications/{application}')->group(function () {
     Route::get('changes/create', [ChangeController::class, 'create'])->name('changes.create');
     Route::post('changes', [ChangeController::class, 'store'])->name('changes.store');
     Route::get('changes', [ChangeController::class, 'index'])->name('changes.index');
-    Route::get('changes/{change}', [ChangeController::class, 'show'])->name('changes.show'); // Tambahkan rute ini
+    Route::get('changes/{change}', [ChangeController::class, 'show'])->name('changes.show');
     Route::delete('changes/{change}', [ChangeController::class, 'destroy'])->name('changes.destroy');
 });
 

@@ -1,6 +1,7 @@
 <?php
 namespace App\Http\Controllers;
 
+use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Models\Application;
 use Illuminate\Http\Request;
 
@@ -68,6 +69,26 @@ class ApplicationController extends Controller
         $application->update($request->all());
         // Redirect ke halaman index
         return redirect()->route('applications.index');
+    }
+
+    public function catalog($id)
+    {
+        // Mengambil data aplikasi berdasarkan id
+        $application = Application::findOrFail($id);
+        // Mengambil data perubahan terkait aplikasi
+        $changes = $application->changes;
+
+        // Mengembalikan view 'applications.catalog' dengan data aplikasi dan perubahan
+        return view('applications.catalog', compact('application', 'changes'));
+    }
+
+    public function downloadPdf($id)
+    {
+        $application = Application::findOrFail($id);
+        $changes = $application->changes;
+    
+        $pdf = PDF::loadView('applications.pdf', compact('application', 'changes'));
+        return $pdf->download('katalog_perubahan_sistem_aplikasi.pdf');
     }
 
     // Menghapus aplikasi dari database
