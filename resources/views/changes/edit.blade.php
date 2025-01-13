@@ -2,6 +2,8 @@
 
 @section('title', 'Edit Perubahan')
 
+@section('header-title', 'Perubahan')
+
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -14,55 +16,63 @@
                         @csrf
                         @method('PUT')
 
-                        <div class="mb-3">
-                            <label for="perubahan" class="form-label">Perubahan:</label>
-                            <textarea class="form-control" name="perubahan" rows="4"
-                                required>{{ $change->perubahan }}</textarea>
+                        <div class="row mb-3">
+                            <div class="col-md-12">
+                                <label for="perubahan" class="form-label">Perubahan:</label>
+                                <textarea class="form-control" name="perubahan" rows="4"
+                                    required>{{ $change->perubahan }}</textarea>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="tingkat_kepentingan" class="form-label">Tingkat Kepentingan:</label>
-                            <select class="form-select" name="tingkat_kepentingan" required>
-                                <option value="Normal" {{ $change->tingkat_kepentingan == 'Normal' ? 'selected' : '' }}>
-                                    Normal</option>
-                                <option value="Mendesak"
-                                    {{ $change->tingkat_kepentingan == 'Mendesak' ? 'selected' : '' }}>Mendesak</option>
-                            </select>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="tingkat_kepentingan" class="form-label">Tingkat Kepentingan:</label>
+                                <select class="form-select" name="tingkat_kepentingan" required>
+                                    <option value="Normal"
+                                        {{ $change->tingkat_kepentingan == 'Normal' ? 'selected' : '' }}>Normal</option>
+                                    <option value="Mendesak"
+                                        {{ $change->tingkat_kepentingan == 'Mendesak' ? 'selected' : '' }}>Mendesak
+                                    </option>
+                                </select>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="request_date" class="form-label">Tanggal Permintaan:</label>
+                                <input type="date" class="form-control" name="request_date"
+                                    value="{{ $change->request_date }}" required>
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="request_date" class="form-label">Tanggal Permintaan:</label>
-                            <input type="date" class="form-control" name="request_date"
-                                value="{{ $change->request_date }}" required>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="version" class="form-label">Versi:</label>
+                                <input type="text" class="form-control" name="version" value="{{ $change->version }}"
+                                    required>
+                            </div>
+                            <div class="col-md-6">
+                                <label for="approval_date" class="form-label">Tanggal Persetujuan:</label>
+                                <input type="date" class="form-control" name="approval_date"
+                                    value="{{ $change->approval_date }}">
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="version" class="form-label">Versi:</label>
-                            <input type="text" class="form-control" name="version" value="{{ $change->version }}"
-                                required>
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="uat_date" class="form-label">Tanggal UAT:</label>
+                                <input type="date" class="form-control" name="uat_date" value="{{ $change->uat_date }}">
+                            </div>
+                            <div class="col-md-6">
+                                <label for="release_date" class="form-label">Tanggal Rilis:</label>
+                                <input type="date" class="form-control" name="release_date"
+                                    value="{{ $change->release_date }}">
+                            </div>
                         </div>
 
-                        <div class="mb-3">
-                            <label for="approval_date" class="form-label">Tanggal Persetujuan:</label>
-                            <input type="date" class="form-control" name="approval_date"
-                                value="{{ $change->approval_date }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="uat_date" class="form-label">Tanggal UAT:</label>
-                            <input type="date" class="form-control" name="uat_date" value="{{ $change->uat_date }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="release_date" class="form-label">Tanggal Rilis:</label>
-                            <input type="date" class="form-control" name="release_date"
-                                value="{{ $change->release_date }}">
-                        </div>
-
-                        <div class="mb-3">
-                            <label for="target_release_date" class="form-label">Tanggal Rilis Target:</label>
-                            <input type="date" class="form-control" name="target_release_date"
-                                value="{{ $change->target_release_date }}">
+                        <div class="row mb-3">
+                            <div class="col-md-6">
+                                <label for="target_release_date" class="form-label">Tanggal Rilis Target:</label>
+                                <input type="date" class="form-control" name="target_release_date"
+                                    value="{{ $change->target_release_date }}">
+                            </div>
                         </div>
 
                         <div class="mt-4 d-flex justify-content-end">

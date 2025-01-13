@@ -2,6 +2,8 @@
 
 @section('title', 'Identitas Aplikasi')
 
+@section('header-title', 'Identitas Aplikasi')
+
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
@@ -69,7 +71,7 @@
                             </div>
                         </div>
 
-                        <div class="mt-4">
+                        <div class="mt-4 d-flex justify-content-end">
                             <button type="submit" class="btn btn-tambah me-2">
                                 <i class="bi bi-save me-1"></i>Simpan
                             </button>

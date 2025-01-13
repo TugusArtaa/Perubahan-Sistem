@@ -10,7 +10,7 @@ class ApplicationController extends Controller
     public function index()
     {
         // Mengambil semua data aplikasi beserta relasi 'changes'
-        $applications = Application::with('changes')->get();
+        $applications = Application::paginate(10);
         // Mengembalikan view 'applications.index' dengan data aplikasi
         return view('applications.index', compact('applications'));
     }

@@ -12,9 +12,16 @@ class ChangeController extends Controller
     public function index()
     {
         // Mengambil semua data perubahan
-        $changes = Change::all();
+        $changes = Change::paginate(10);
         // Mengembalikan view 'changes.perubahan' dengan data perubahan
         return view('changes.perubahan', compact('changes'));
+    }
+    
+    // Menampilkan detail perubahan
+    public function show($id)
+    {
+        $change = Change::findOrFail($id);
+        return view('changes.show', compact('change'));
     }
 
     // Menampilkan form untuk membuat perubahan baru
