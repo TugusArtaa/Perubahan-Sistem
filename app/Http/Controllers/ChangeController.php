@@ -58,26 +58,47 @@ class ChangeController extends Controller
                     $editUrl = route('changes.edit', $row->id);
                     $deleteUrl = route('application.changes.destroy', ['application' => $row->application_id, 'change' => $row->id]);
                     
-                    // Always show approval buttons regardless of current status
-                    return '
-                        <div class="text-center">
-                            <a href="' . $editUrl . '" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Edit Perubahan">
+                    $actions = '<div class="text-center">';
+                    
+                    // Edit button (only if user can edit changes)
+                    if (auth()->user()->can('edit-changes')) {
+                        $actions .= '<a href="' . $editUrl . '" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Edit Perubahan">
                                 <i class="bi bi-pencil"></i>
-                            </a>
-                            <button type="button" class="btn btn-sm btn-secondary" onclick="deleteChange(' . $row->id . ', ' . $row->application_id . ')" data-bs-toggle="tooltip" title="Hapus Perubahan">
+                            </a>';
+                    }
+                    
+                    // Delete button (only if user can delete changes)
+                    if (auth()->user()->can('delete-changes')) {
+                        $actions .= '<button type="button" class="btn btn-sm btn-danger" onclick="deleteChange(' . $row->id . ', ' . $row->application_id . ')" data-bs-toggle="tooltip" title="Hapus Perubahan">
                                 <i class="bi bi-trash"></i>
-                            </button>
-                        </div>';
+                            </button>';
+                    }
+                    
+                    $actions .= '</div>';
+                    return $actions;
                 })
                 ->addColumn('approval', function($row) {
-    
-                    $approvalButtons = '
-                        <button type="button" class="btn btn-sm btn-success me-1" onclick="approveChange(' . $row->id . ')" data-bs-toggle="tooltip" title="Setujui">
-                            <i class="bi bi-check"></i>
-                        </button>
-                        <button type="button" class="btn btn-sm btn-danger me-1" onclick="rejectChange(' . $row->id . ')" data-bs-toggle="tooltip" title="Tolak">
-                            <i class="bi bi-x"></i>
-                        </button>';
+                    $approvalButtons = '';
+                    
+                    // Only show approval buttons if user has permission
+                    if (auth()->user()->can('approve-changes')) {
+                        $approvalButtons .= '
+                            <button type="button" class="btn btn-sm btn-success me-1" onclick="approveChange(' . $row->id . ')" data-bs-toggle="tooltip" title="Setujui">
+                                <i class="bi bi-check"></i>
+                            </button>';
+                    }
+                    
+                    if (auth()->user()->can('reject-changes')) {
+                        $approvalButtons .= '
+                            <button type="button" class="btn btn-sm btn-danger me-1" onclick="rejectChange(' . $row->id . ')" data-bs-toggle="tooltip" title="Tolak">
+                                <i class="bi bi-x"></i>
+                            </button>';
+                    }
+                    
+                    // If no approval permissions, show a message or empty div
+                    if (empty($approvalButtons)) {
+                        return '<div class="text-center text-muted"><small>No permission</small></div>';
+                    }
                     
                     return '
                         <div class="text-center">
