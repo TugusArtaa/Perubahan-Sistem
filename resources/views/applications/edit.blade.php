@@ -2,7 +2,76 @@
 
 @section('title', 'Edit Aplikasi')
 
-@section('header-title', 'Aplikasi')
+@section('heade                        <div class="d-flex justify-content-end">
+                            <button type="submit" class="btn btn-tambah me-2" id="submitBtn">
+                                <i class="bi bi-save me-1"></i>Update
+                            </button>
+                            <a href="{{ route('applications.index') }}" class="btn btn-secondary">
+                                <i class="bi bi-x-circle me-1"></i>Batal
+                            </a>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+@endsection
+
+@push('scripts')
+<script>
+$(document).ready(function() {
+    // Form submission with SweetAlert2 confirmation
+    $('form').on('submit', function(e) {
+        e.preventDefault();
+        
+        Swal.fire({
+            title: 'Konfirmasi Update',
+            text: 'Apakah Anda yakin ingin memperbarui data aplikasi ini?',
+            icon: 'question',
+            showCancelButton: true,
+            confirmButtonColor: '#198754',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Update!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                // Show loading
+                Swal.fire({
+                    title: 'Memperbarui...',
+                    text: 'Sedang memproses pembaruan data aplikasi',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+                
+                // Submit the form
+                this.submit();
+            }
+        });
+    });
+    
+    // Show validation errors with SweetAlert2
+    @if($errors->any())
+        let errorMessages = '';
+        @foreach($errors->all() as $error)
+            errorMessages += '• {{ $error }}\n';
+        @endforeach
+        
+        Swal.fire({
+            title: 'Validasi Gagal!',
+            text: errorMessages,
+            icon: 'error',
+            confirmButtonText: 'OK'
+        });
+    @endif
+});
+</script>
+@endpushkasi')
 
 @section('content')
 <div class="container-fluid">

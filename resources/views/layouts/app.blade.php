@@ -4,9 +4,52 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/1.13.6/css/dataTables.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.datatables.net/responsive/2.5.0/css/responsive.bootstrap5.min.css">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.min.css">
+    <style>
+    /* Custom SweetAlert2 styling to match Bootstrap theme */
+    .swal2-popup {
+        border-radius: 0.5rem !important;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15) !important;
+    }
+    
+    .swal2-title {
+        color: #212529 !important;
+        font-weight: 600 !important;
+    }
+    
+    .swal2-content {
+        color: #6c757d !important;
+    }
+    
+    /* Fix success icon styling to match Bootstrap theme */
+    .swal2-success {
+        border-color: #198754 !important;
+    }
+    
+    .swal2-success .swal2-success-ring {
+        border-color: #198754 !important;
+    }
+    
+    .swal2-error .swal2-error-x .swal2-error-line {
+        background-color: #dc3545 !important;
+    }
+    
+    .swal2-warning .swal2-warning-icon {
+        border-color: #fd7e14 !important;
+        color: #fd7e14 !important;
+    }
+    
+    .swal2-question .swal2-question-mark {
+        border-color: #0d6efd !important;
+        color: #0d6efd !important;
+    }
+    </style>
     <style>
     .icon-size {
         width: 24px;
@@ -107,7 +150,46 @@
         border-radius: 10px;
         margin-bottom: 20px;
     }
+
+    /* Profile Dropdown Styles */
+    .dropdown-toggle:after {
+        border: none;
+        content: "";
+        display: inline-block;
+        font-family: "bootstrap-icons";
+        font-size: 12px;
+        margin-left: 8px;
+        vertical-align: middle;
+    }
+
+    .dropdown-menu {
+        border: none;
+        box-shadow: 0 0.5rem 1rem rgba(0, 0, 0, 0.15);
+        min-width: 250px;
+    }
+
+    .dropdown-header {
+        background-color: #f8f9fa;
+        border-bottom: 1px solid #dee2e6;
+        padding: 12px 20px;
+    }
+
+    .dropdown-item {
+        padding: 10px 20px;
+        transition: all 0.2s ease;
+    }
+
+    .dropdown-item:hover {
+        background-color: #198754;
+        color: white;
+    }
+
+    .dropdown-item i {
+        width: 16px;
+        text-align: center;
+    }
     </style>
+    <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 
 <body>
@@ -152,6 +234,19 @@
                             Perubahan
                         </a>
                     </li>
+                    @auth
+                    <li class="nav-item mt-3">
+                        <hr class="w-100 my-2" style="border-color: rgba(255, 255, 255, 0.3);">
+                        <a href="{{ route('profile.edit') }}" class="nav-link">
+                            <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
+                                stroke="currentColor" class="icon-size me-2">
+                                <path stroke-linecap="round" stroke-linejoin="round"
+                                    d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
+                            </svg>
+                            Profile
+                        </a>
+                    </li>
+                    @endauth
                 </ul>
             </div>
 
@@ -159,7 +254,46 @@
             <div class="col-md-10 p-4 main-content">
                 <div class="header d-flex justify-content-between align-items-center mb-4">
                     <h4 class="header-title">@yield('header-title', 'KATALOG PERUBAHAN SISTEM APLIKASI')</h4>
-                    <img src="{{ asset('img/BPDLogo.png') }}" alt="Bank BPD Bali Logo" class="logo">
+                    <div class="d-flex align-items-center">
+                        <!-- User Profile Dropdown -->
+                        @auth
+                        <div class="dropdown me-3">
+                            <button class="btn btn-light dropdown-toggle d-flex align-items-center" type="button" 
+                                    id="profileDropdown" data-bs-toggle="dropdown" aria-expanded="false">
+                                <div class="bg-success rounded-circle me-2 d-flex align-items-center justify-content-center" 
+                                     style="width: 35px; height: 35px;">
+                                    <i class="bi bi-person-fill text-white"></i>
+                                </div>
+                                <span class="me-1">{{ Auth::user()->name }}</span>
+                            </button>
+                            <ul class="dropdown-menu dropdown-menu-end" aria-labelledby="profileDropdown">
+                                <li class="dropdown-header">
+                                    <div class="d-flex flex-column">
+                                        <strong>{{ Auth::user()->name }}</strong>
+                                        <small class="text-muted">{{ Auth::user()->email }}</small>
+                                    </div>
+                                </li>
+                                <li><hr class="dropdown-divider"></li>
+                                <li>
+                                    <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
+                                        <i class="bi bi-person-gear me-2"></i>
+                                        Edit Profile
+                                    </a>
+                                </li>
+                                <li>
+                                    <form method="POST" action="{{ route('logout') }}" class="d-inline">
+                                        @csrf
+                                        <button type="submit" class="dropdown-item d-flex align-items-center">
+                                            <i class="bi bi-box-arrow-right me-2"></i>
+                                            Logout
+                                        </button>
+                                    </form>
+                                </li>
+                            </ul>
+                        </div>
+                        @endauth
+                        <img src="{{ asset('img/BPDLogo.png') }}" alt="Bank BPD Bali Logo" class="logo">
+                    </div>
                 </div>
                 <div class="content">
                     @yield('content')
@@ -169,8 +303,34 @@
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
+    <script src="https://code.jquery.com/jquery-3.7.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11.12.4/dist/sweetalert2.all.min.js"></script>
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
+    <script>
+    // Global SweetAlert2 configuration
+    const Toast = Swal.mixin({
+        toast: true,
+        position: 'top-end',
+        showConfirmButton: false,
+        timer: 3000,
+        timerProgressBar: true,
+        didOpen: (toast) => {
+            toast.addEventListener('mouseenter', Swal.stopTimer)
+            toast.addEventListener('mouseleave', Swal.resumeTimer)
+        }
+    });
+
+    // Global SweetAlert2 defaults - set without firing
+    Swal.setDefaults({
+        customClass: {
+            confirmButton: 'btn btn-success mx-2',
+            cancelButton: 'btn btn-secondary mx-2'
+        },
+        buttonsStyling: false
+    });
+
+    </script>
     <script>
     tippy('[data-tippy-content]', {
         placement: 'bottom',
@@ -178,6 +338,11 @@
         theme: 'light',
     });
     </script>
+    <script src="https://cdn.datatables.net/1.13.6/js/jquery.dataTables.min.js"></script>
+    <script src="https://cdn.datatables.net/1.13.6/js/dataTables.bootstrap5.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/dataTables.responsive.min.js"></script>
+    <script src="https://cdn.datatables.net/responsive/2.5.0/js/responsive.bootstrap5.min.js"></script>
+    @stack('scripts')
 </body>
 
 </html>

@@ -4,16 +4,50 @@ namespace App\Http\Controllers;
 use Barryvdh\DomPDF\Facade\Pdf as PDF;
 use App\Models\Application;
 use Illuminate\Http\Request;
+use Yajra\DataTables\Facades\DataTables;
 
 class ApplicationController extends Controller
 {
     // Menampilkan daftar aplikasi
     public function index()
     {
-        // Mengambil semua data aplikasi beserta relasi 'changes'
-        $applications = Application::paginate(10);
-        // Mengembalikan view 'applications.index' dengan data aplikasi
-        return view('applications.index', compact('applications'));
+        // Mengembalikan view 'applications.index'
+        return view('applications.index');
+    }
+
+    // DataTables endpoint for applications
+    public function getApplicationsData(Request $request)
+    {
+        if ($request->ajax()) {
+            $data = Application::select(['id', 'nama', 'fungsi', 'pengguna', 'pemilik', 'pengembang']);
+
+            return DataTables::of($data)
+                ->addIndexColumn()
+                ->addColumn('action', function($row) {
+                    $catalogUrl = route('applications.catalog', $row->id);
+                    $editUrl = route('applications.edit', $row->id);
+                    $changeUrl = route('application.changes.create', $row->id);
+                    $deleteUrl = route('applications.destroy', $row->id);
+                    
+                    return '
+                        <div class="text-center">
+                            <a href="' . $catalogUrl . '" class="btn btn-sm btn-primary me-1" data-bs-toggle="tooltip" title="Katalog Aplikasi">
+                                <i class="bi bi-book"></i>
+                            </a>
+                            <a href="' . $editUrl . '" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Edit Aplikasi">
+                                <i class="bi bi-pencil"></i>
+                            </a>
+                            <a href="' . $changeUrl . '" class="btn btn-sm btn-info me-1" data-bs-toggle="tooltip" title="Tambah Perubahan">
+                                <i class="bi bi-plus-circle"></i>
+                            </a>
+                            <button type="button" class="btn btn-sm btn-danger" onclick="deleteApplication(' . $row->id . ')" data-bs-toggle="tooltip" title="Hapus Aplikasi">
+                                <i class="bi bi-trash"></i>
+                            </button>
+                        </div>';
+                })
+                ->rawColumns(['action'])
+                ->make(true);
+        }
     }
 
     // Menampilkan form untuk membuat aplikasi baru
@@ -55,7 +89,7 @@ class ApplicationController extends Controller
     public function update(Request $request, $id)
     {
         // Validasi data dari form
-        $request->validate([
+        $validatedData = $request->validate([
             'nama' => 'required',
             'fungsi' => 'required',
             'pengguna' => 'required',
@@ -65,10 +99,14 @@ class ApplicationController extends Controller
 
         // Mengambil data aplikasi berdasarkan id
         $application = Application::findOrFail($id);
+        $applicationName = $application->nama;
+        
         // Memperbarui data aplikasi dengan data baru
-        $application->update($request->all());
-        // Redirect ke halaman index
-        return redirect()->route('applications.index');
+        $application->update($validatedData);
+        
+        // Redirect ke halaman index dengan pesan sukses
+        return redirect()->route('applications.index')
+            ->with('success', "Aplikasi '{$applicationName}' berhasil diperbarui!");
     }
 
     public function catalog($id)
@@ -92,13 +130,38 @@ class ApplicationController extends Controller
     }
 
     // Menghapus aplikasi dari database
-    public function destroy($id)
+    public function destroy(Request $request, $id)
     {
-        // Mengambil data aplikasi berdasarkan id
-        $application = Application::findOrFail($id);
-        // Menghapus data aplikasi
-        $application->delete();
-        // Redirect ke halaman index
-        return redirect()->route('applications.index');
+        try {
+            // Mengambil data aplikasi berdasarkan id
+            $application = Application::findOrFail($id);
+            $applicationName = $application->nama;
+            
+            // Menghapus data aplikasi
+            $application->delete();
+            
+            // Check if request is AJAX
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => true,
+                    'message' => "Aplikasi '{$applicationName}' berhasil dihapus!"
+                ]);
+            }
+            
+            // Redirect ke halaman index dengan pesan sukses
+            return redirect()->route('applications.index')
+                ->with('success', "Aplikasi '{$applicationName}' berhasil dihapus!");
+                
+        } catch (\Exception $e) {
+            if ($request->ajax()) {
+                return response()->json([
+                    'success' => false,
+                    'message' => 'Gagal menghapus aplikasi: ' . $e->getMessage()
+                ], 500);
+            }
+            
+            return redirect()->route('applications.index')
+                ->with('error', 'Gagal menghapus aplikasi: ' . $e->getMessage());
+        }
     }
 }

@@ -13,7 +13,7 @@ class Change extends Model
     protected $fillable = [
         'application_id', 'perubahan', 'tingkat_kepentingan', 
         'request_date', 'approval_date', 'uat_date', 'release_date', 
-        'version', 'target_release_date'
+        'version', 'target_release_date', 'approval_status'
     ];
 
     // Mendefinisikan relasi Many-to-One ke model Application

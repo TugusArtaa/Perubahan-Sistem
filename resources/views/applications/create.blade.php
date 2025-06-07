@@ -1,9 +1,6 @@
 @extends('layouts.app')
 
 @section('title', 'Identitas Aplikasi')
-
-@section('header-title', 'Identitas Aplikasi')
-
 @section('content')
 <div class="container-fluid">
     <div class="row justify-content-center">
