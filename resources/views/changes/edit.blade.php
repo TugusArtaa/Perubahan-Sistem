@@ -25,7 +25,7 @@
                         </div>
 
                         <div class="row mb-3">
-                            <div class="col-md-6">
+                            <div class="col-md-12">
                                 <label for="tingkat_kepentingan" class="form-label">Tingkat Kepentingan:</label>
                                 <select class="form-select" name="tingkat_kepentingan" required>
                                     <option value="Normal"
@@ -35,14 +35,14 @@
                                     </option>
                                 </select>
                             </div>
-                            <div class="col-md-6">
+                            {{-- <div class="col-md-6">
                                 <label for="approval_status" class="form-label">Status Persetujuan:</label>
                                 <select class="form-select" name="approval_status">
                                     <option value="pending" {{ ($change->approval_status ?? 'pending') == 'pending' ? 'selected' : '' }}>Menunggu Persetujuan</option>
                                     <option value="approved" {{ ($change->approval_status ?? 'pending') == 'approved' ? 'selected' : '' }}>Disetujui</option>
                                     <option value="rejected" {{ ($change->approval_status ?? 'pending') == 'rejected' ? 'selected' : '' }}>Ditolak</option>
                                 </select>
-                            </div>
+                            </div> --}}
                         </div>
 
                         <div class="row mb-3">

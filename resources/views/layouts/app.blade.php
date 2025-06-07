@@ -214,6 +214,7 @@
                             Dashboard
                         </a>
                     </li>
+                    @can('view-applications')
                     <li class="nav-item mb-2">
                         <a href="{{ route('applications.index') }}" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -224,6 +225,8 @@
                             Aplikasi
                         </a>
                     </li>
+                    @endcan
+                    @can('view-changes')
                     <li class="nav-item">
                         <a href="{{ route('changes.index') }}" class="nav-link">
                             <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke-width="1.5"
@@ -234,6 +237,42 @@
                             Perubahan
                         </a>
                     </li>
+                    @endcan
+                    
+                    @if(auth()->user()->can('view-users') || auth()->user()->can('view-roles') || auth()->user()->can('view-permissions'))
+                    <!-- Role & Permission Management -->
+                    <li class="nav-item mt-3 mb-2">
+                        <hr class="w-100 my-2" style="border-color: rgba(255, 255, 255, 0.3);">
+                        <h6 class="sidebar-subtitle px-3 mb-2" style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 1px;">
+                            User Management
+                        </h6>
+                    </li>
+                    @can('view-users')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('users.index') }}" class="nav-link">
+                            <i class="bi bi-people icon-size me-2"></i>
+                            Users
+                        </a>
+                    </li>
+                    @endcan
+                    @can('view-roles')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('roles.index') }}" class="nav-link">
+                            <i class="bi bi-shield-check icon-size me-2"></i>
+                            Roles
+                        </a>
+                    </li>
+                    @endcan
+                    @can('view-permissions')
+                    <li class="nav-item mb-2">
+                        <a href="{{ route('permissions.index') }}" class="nav-link">
+                            <i class="bi bi-key icon-size me-2"></i>
+                            Permissions
+                        </a>
+                    </li>
+                    @endcan
+                    @endif
+                    
                     @auth
                     <li class="nav-item mt-3">
                         <hr class="w-100 my-2" style="border-color: rgba(255, 255, 255, 0.3);">

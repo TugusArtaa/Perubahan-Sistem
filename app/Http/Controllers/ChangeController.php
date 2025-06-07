@@ -155,8 +155,8 @@ class ChangeController extends Controller
 
         // Mengambil data perubahan berdasarkan id
         $change = Change::findOrFail($id);
-        // Memperbarui data perubahan dengan data baru
-        $change->update($request->all());
+        // Memperbarui data perubahan dengan data baru kecuali approval_status
+        $change->update($request->except('approval_status'));
 
         // Redirect ke halaman index
         return redirect()->route('changes.index');

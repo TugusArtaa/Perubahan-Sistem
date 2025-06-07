@@ -8,10 +8,12 @@
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-success">Daftar Aplikasi</h2>
+        @can('create-applications')
         <a href="{{ route('applications.create') }}" class="btn btn-success">
             <i class="bi bi-plus-circle me-1"></i>
             Tambah Aplikasi
         </a>
+        @endcan
     </div>
 
     <div class="card border-0 shadow-sm">
