@@ -46,12 +46,10 @@
                                     </ul>
                                 </div>
                             </div>
-                        </div>
-
-                        <div class="row">
+                        </div>                        <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-between">
-                                    <a href="{{ route('permissions.index') }}" class="btn btn-secondary">
+                                <div class="d-flex justify-content-between flex-column flex-sm-row">
+                                    <a href="{{ route('permissions.index') }}" class="btn btn-secondary mb-2 mb-sm-0">
                                         <i class="bi bi-arrow-left"></i> Back to Permissions
                                     </a>
                                     <button type="submit" class="btn btn-primary">
@@ -66,6 +64,102 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Mobile Responsive Styles for Permission Forms */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .card-header h5 {
+        font-size: 1.2rem;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.75rem;
+    }
+    
+    .form-text {
+        font-size: 0.8rem;
+    }
+    
+    .alert {
+        font-size: 0.9rem;
+        padding: 1rem;
+    }
+    
+    .alert h6 {
+        font-size: 1rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .alert ul {
+        font-size: 0.85rem;
+        padding-left: 1.2rem;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .d-flex.justify-content-between {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding: 0.5rem;
+    }
+    
+    .card {
+        margin: 0;
+        border-radius: 0.5rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-header {
+        padding: 1rem;
+    }
+    
+    .card-header h5 {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+    .form-control {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .btn {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .alert {
+        padding: 0.75rem;
+        font-size: 0.85rem;
+    }
+    
+    .alert ul {
+        font-size: 0.8rem;
+    }
+}
+</style>
 @endsection
 
 @push('scripts')

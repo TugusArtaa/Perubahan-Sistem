@@ -74,11 +74,10 @@
                                             <span class="text-muted">No roles assigned</span>
                                         @endif
                                     </div>
-                                    
-                                    <label class="form-label">Assign New Roles</label>
-                                    <div class="row">
+                                      <label class="form-label">Assign New Roles</label>
+                                    <div class="row roles-grid">
                                         @foreach($roles as $role)
-                                            <div class="col-md-3 mb-2">
+                                            <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-2">
                                                 <div class="form-check">
                                                     <input class="form-check-input" type="checkbox" 
                                                            name="roles[]" value="{{ $role->name }}" 
@@ -97,8 +96,8 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-between">
-                                    <a href="{{ route('users.index') }}" class="btn btn-secondary">
+                                <div class="d-flex justify-content-between flex-column flex-sm-row">
+                                    <a href="{{ route('users.index') }}" class="btn btn-secondary mb-2 mb-sm-0">
                                         <i class="bi bi-arrow-left"></i> Back to Users
                                     </a>
                                     <button type="submit" class="btn btn-warning">
@@ -113,6 +112,109 @@
         </div>
     </div>
 </div>
+
+<style>
+/* Mobile Responsive Styles for User Forms */
+@media (max-width: 768px) {
+    .card-body {
+        padding: 1.5rem;
+    }
+    
+    .card-header h5 {
+        font-size: 1.2rem;
+    }
+    
+    .form-label {
+        font-weight: 600;
+        font-size: 0.9rem;
+        margin-bottom: 0.5rem;
+    }
+    
+    .form-control {
+        font-size: 0.9rem;
+        padding: 0.6rem 0.75rem;
+    }
+    
+    .form-text {
+        font-size: 0.8rem;
+    }
+    
+    .roles-grid .col-lg-3,
+    .roles-grid .col-md-4 {
+        flex: 0 0 100%;
+        max-width: 100%;
+    }
+    
+    .form-check {
+        padding: 0.5rem;
+        margin-bottom: 0.5rem;
+        border: 1px solid #e9ecef;
+        border-radius: 0.375rem;
+        background-color: #f8f9fa;
+    }
+    
+    .form-check-label {
+        font-size: 0.9rem;
+        padding-left: 0.5rem;
+    }
+    
+    .badge {
+        font-size: 0.8rem;
+        padding: 0.4rem 0.6rem;
+        margin: 0.2rem 0.2rem 0.2rem 0;
+    }
+    
+    .btn {
+        padding: 0.6rem 1.2rem;
+        font-size: 0.9rem;
+        width: 100%;
+        margin-bottom: 0.5rem;
+    }
+    
+    .d-flex.justify-content-between {
+        gap: 0.5rem;
+    }
+}
+
+@media (max-width: 576px) {
+    .container-fluid {
+        padding: 0.5rem;
+    }
+    
+    .card {
+        margin: 0;
+        border-radius: 0.5rem;
+    }
+    
+    .card-body {
+        padding: 1rem;
+    }
+    
+    .card-header {
+        padding: 1rem;
+    }
+    
+    .card-header h5 {
+        font-size: 1.1rem;
+        text-align: center;
+    }
+    
+    .form-control {
+        font-size: 16px; /* Prevents zoom on iOS */
+    }
+    
+    .btn {
+        font-size: 1rem;
+        padding: 0.75rem 1rem;
+    }
+    
+    .badge {
+        font-size: 0.75rem;
+        display: inline-block;
+        margin: 0.1rem;
+    }
+}
+</style>
 @endsection
 
 @push('scripts')
