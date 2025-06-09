@@ -157,9 +157,9 @@
         margin-bottom: 20px;
     }
 
-    /* Mobile sidebar toggle button */
+    /* Mobile sidebar toggle button - Hidden on desktop */
     .sidebar-toggle {
-        display: none;
+        display: none !important;
         position: fixed;
         top: 12px;
         left: 12px;
@@ -177,7 +177,6 @@
         transition: all 0.3s ease;
         width: 40px;
         height: 40px;
-        display: flex;
         align-items: center;
         justify-content: center;
         user-select: none;
@@ -190,6 +189,16 @@
         opacity: 1;
         visibility: visible;
         transform: scale(1);
+    }
+
+    /* Explicitly hide on larger screens */
+    @media (min-width: 769px) {
+        .sidebar-toggle {
+            display: none !important;
+            visibility: hidden !important;
+            opacity: 0 !important;
+            pointer-events: none !important;
+        }
     }
 
     .sidebar-toggle:hover,
@@ -235,7 +244,10 @@
         }
 
         .sidebar-toggle {
-            display: flex;
+            display: flex !important;
+            visibility: visible !important;
+            opacity: 1 !important;
+            pointer-events: auto !important;
         }
 
         /* Hide the toggle button when sidebar is open */
