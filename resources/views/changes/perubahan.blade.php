@@ -288,6 +288,17 @@ $(document).ready(function() {
         scrollCollapse: true,
         responsive: false, // Disable responsive, use scrollX instead
         autoWidth: false,
+        columnDefs: [
+            {
+                targets: [10], // Action column
+                responsivePriority: 1,
+                width: "120px",
+                orderable: false,
+                searchable: false,
+                className: 'text-center align-middle'
+            },
+            // ... other column definitions
+        ],
         dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
              '<"row"<"col-sm-12"tr>>' +
              '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',

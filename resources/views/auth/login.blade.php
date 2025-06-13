@@ -23,6 +23,7 @@
             display: flex;
             align-items: center;
             justify-content: center;
+            padding: 20px;
         }
 
         .login-card {
@@ -32,6 +33,7 @@
             overflow: hidden;
             max-width: 900px;
             width: 100%;
+            margin: 0 auto;
         }
 
         .login-left {
@@ -47,6 +49,9 @@
 
         .login-right {
             padding: 60px 40px;
+            display: flex;
+            flex-direction: column;
+            justify-content: center;
         }
 
         .logo {
@@ -133,89 +138,86 @@
             .login-right {
                 padding: 40px 20px;
             }
+            .login-container {
+                padding: 10px;
+            }
         }
     </style>
 </head>
 
 <body>
     <div class="login-container">
-        <div class="container">
-            <div class="row justify-content-center">
-                <div class="col-12">
-                    <div class="login-card">
-                        <div class="row g-0">
-                            <!-- Left Side - Branding -->
-                            <div class="col-md-6 login-left">
-                                <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSI Logo" class="logo">
-                                <h2 class="mb-3">Welcome Back!</h2>
-                                <h4 class="mb-4">KPSI</h4>
-                                <p class="mb-4">Katalog Perubahan Sistem Informasi</p>
-                                <p class="opacity-75">Manage your application changes efficiently and securely</p>
-                            </div>
+        <div class="login-card">
+            <div class="row g-0 h-100">
+                <!-- Left Side - Branding -->
+                <div class="col-md-6 login-left">
+                    <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSI Logo" class="logo">
+                    <h2 class="mb-3">Welcome Back!</h2>
+                    <h4 class="mb-4">KPSI</h4>
+                    <p class="mb-4">Katalog Perubahan Sistem Informasi</p>
+                    <p class="opacity-75">Manage your application changes efficiently and securely</p>
+                </div>
 
-                            <!-- Right Side - Login Form -->
-                            <div class="col-md-6 login-right">
-                                <div class="mb-4">
-                                    <h3 class="text-dark mb-2">Sign In</h3>
-                                    <p class="text-muted">Enter your credentials to access your account</p>
-                                </div>
-
-                                <!-- Session Status -->
-                                @if (session('status'))
-                                    <div class="alert alert-success mb-4" role="alert">
-                                        <i class="bi bi-check-circle-fill me-2"></i>
-                                        {{ session('status') }}
-                                    </div>
-                                @endif
-
-                                <form method="POST" action="{{ route('login') }}">
-                                    @csrf
-
-                                    <!-- Email Address -->
-                                    <div class="mb-3">
-                                        <label for="email" class="form-label">
-                                            <i class="bi bi-envelope me-2"></i>Email Address
-                                        </label>
-                                        <input type="email" 
-                                               class="form-control @error('email') is-invalid @enderror" 
-                                               id="email" 
-                                               name="email" 
-                                               value="{{ old('email') }}" 
-                                               required 
-                                               autofocus 
-                                               autocomplete="username"
-                                               placeholder="Enter your email address">
-                                        @error('email')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Password -->
-                                    <div class="mb-3">
-                                        <label for="password" class="form-label">
-                                            <i class="bi bi-lock me-2"></i>Password
-                                        </label>
-                                        <input type="password" 
-                                               class="form-control @error('password') is-invalid @enderror" 
-                                               id="password" 
-                                               name="password" 
-                                               required 
-                                               autocomplete="current-password"
-                                               placeholder="Enter your password">
-                                        @error('password')
-                                            <div class="invalid-feedback">{{ $message }}</div>
-                                        @enderror
-                                    </div>
-
-                                    <!-- Login Button -->
-                                    <button type="submit" class="btn btn-success w-100 mb-3">
-                                        <i class="bi bi-box-arrow-in-right me-2"></i>
-                                        Sign In
-                                    </button>
-                                </form>
-                            </div>
-                        </div>
+                <!-- Right Side - Login Form -->
+                <div class="col-md-6 login-right">
+                    <div class="mb-4">
+                        <h3 class="text-dark mb-2">Sign In</h3>
+                        <p class="text-muted">Enter your credentials to access your account</p>
                     </div>
+
+                    <!-- Session Status -->
+                    @if (session('status'))
+                        <div class="alert alert-success mb-4" role="alert">
+                            <i class="bi bi-check-circle-fill me-2"></i>
+                            {{ session('status') }}
+                        </div>
+                    @endif
+
+                    <form method="POST" action="{{ route('login') }}">
+                        @csrf
+
+                        <!-- Email Address -->
+                        <div class="mb-3">
+                            <label for="email" class="form-label">
+                                <i class="bi bi-envelope me-2"></i>Email Address
+                            </label>
+                            <input type="email" 
+                                   class="form-control @error('email') is-invalid @enderror" 
+                                   id="email" 
+                                   name="email" 
+                                   value="{{ old('email') }}" 
+                                   required 
+                                   autofocus 
+                                   autocomplete="username"
+                                   placeholder="Enter your email address">
+                            @error('email')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Password -->
+                        <div class="mb-3">
+                            <label for="password" class="form-label">
+                                <i class="bi bi-lock me-2"></i>Password
+                            </label>
+                            <input type="password" 
+                                   class="form-control @error('password') is-invalid @enderror" 
+                                   id="password" 
+                                   name="password" 
+                                   required 
+                                   autocomplete="current-password"
+                                   placeholder="Enter your password">
+                            @error('password')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
+                        <!-- Login Button -->
+                        <button type="submit" class="btn btn-success w-100 mb-3">
+                            <i class="bi bi-box-arrow-in-right me-2"></i>
+                            Sign In
+                        </button>
+                    </form>
                 </div>
             </div>
         </div>

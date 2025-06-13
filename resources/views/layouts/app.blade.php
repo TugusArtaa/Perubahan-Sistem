@@ -188,6 +188,97 @@
         width: 16px;
         text-align: center;
     }
+
+    /* DataTables Action Button Alignment Fix */
+    .dataTables_wrapper .dataTable td {
+        vertical-align: middle !important;
+    }
+
+    /* Action buttons container */
+    .btn-group-actions {
+        display: flex;
+        gap: 0.25rem;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
+    }
+
+    /* Mobile responsive action buttons */
+    @media (max-width: 768px) {
+        /* Action column specific styling */
+        .dataTables_wrapper .dataTable td:last-child,
+        .dataTables_wrapper .dataTable th:last-child {
+            text-align: center !important;
+            vertical-align: middle !important;
+            padding: 0.5rem 0.25rem !important;
+        }
+        
+        /* Action buttons in mobile */
+        .btn-action {
+            padding: 0.25rem 0.4rem !important;
+            font-size: 0.7rem !important;
+            margin: 0.1rem !important;
+            min-width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+        }
+        
+        /* Button group for actions */
+        .btn-group-actions {
+            display: flex;
+            gap: 0.2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 100px;
+            margin: 0 auto;
+        }
+        
+        /* Ensure buttons don't break layout */
+        .btn-group-actions .btn {
+            flex: 0 0 auto;
+            white-space: nowrap;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .btn-action {
+            padding: 0.2rem 0.3rem !important;
+            font-size: 0.65rem !important;
+            min-width: 28px;
+            height: 28px;
+        }
+        
+        .btn-group-actions {
+            gap: 0.1rem;
+            max-width: 90px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dataTables_wrapper .dataTable {
+            font-size: 0.8rem;
+        }
+        
+        .dataTables_wrapper .dataTable th,
+        .dataTables_wrapper .dataTable td {
+            padding: 0.5rem 0.25rem;
+            word-wrap: break-word;
+            max-width: 150px;
+        }
+        
+        /* Action column specific */
+        .dataTables_wrapper .dataTable td.text-center:last-child {
+            position: sticky;
+            right: 0;
+            background: white;
+            z-index: 1;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
+        }
+    }
     </style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
