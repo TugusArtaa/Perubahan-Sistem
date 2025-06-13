@@ -23,25 +23,28 @@ class UserManagementController extends Controller
                 ->addColumn('roles', function ($user) {
                     return $user->roles->pluck('name')->implode(', ');
                 })
+                ->editColumn('created_at', function ($user) {
+                    return $user->created_at->format('M d, Y H:i');
+                })
                 ->addColumn('action', function ($user) {
-                    $actions = '<div class="btn-group" role="group">';
+                    $actions = '<div class="btn-group-actions">';
                     
                     // View button (always shown for users who can view users)
-                    $actions .= '<a href="' . route('users.show', $user->id) . '" class="btn btn-sm btn-info">
-                            <i class="bi bi-eye"></i> View
+                    $actions .= '<a href="' . route('users.show', $user->id) . '" class="btn btn-action btn-sm btn-info" data-bs-toggle="tooltip" title="Lihat Detail">
+                            <i class="bi bi-eye"></i>
                         </a>';
                     
                     // Edit button (only if user can edit users)
                     if (auth()->user()->can('edit-users')) {
-                        $actions .= '<a href="' . route('users.edit', $user->id) . '" class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> Edit
+                        $actions .= '<a href="' . route('users.edit', $user->id) . '" class="btn btn-action btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit User">
+                                <i class="bi bi-pencil"></i>
                             </a>';
                     }
                     
                     // Delete button (only if user can delete users and user is not current user)
                     if (auth()->user()->can('delete-users') && $user->id !== auth()->id()) {
-                        $actions .= '<button type="button" class="btn btn-sm btn-danger delete-user" data-id="' . $user->id . '">
-                                <i class="bi bi-trash"></i> Delete
+                        $actions .= '<button type="button" class="btn btn-action btn-sm btn-danger delete-user" data-id="' . $user->id . '" data-bs-toggle="tooltip" title="Hapus User">
+                                <i class="bi bi-trash"></i>
                             </button>';
                     }
                     

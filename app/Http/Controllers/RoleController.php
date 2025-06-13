@@ -21,20 +21,23 @@ class RoleController extends Controller
                 ->addColumn('permissions', function ($role) {
                     return $role->permissions->pluck('name')->implode(', ');
                 })
+                ->editColumn('created_at', function ($user) {
+                    return $user->created_at->format('M d, Y H:i');
+                })
                 ->addColumn('action', function ($role) {
-                    $actions = '<div class="btn-group" role="group">';
+                    $actions = '<div class="btn-group-actions">';
                     
                     // Edit button (only if user can edit roles)
                     if (auth()->user()->can('edit-roles')) {
-                        $actions .= '<a href="' . route('roles.edit', $role->id) . '" class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> Edit
+                        $actions .= '<a href="' . route('roles.edit', $role->id) . '" class="btn btn-action btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit Role">
+                                <i class="bi bi-pencil"></i>
                             </a>';
                     }
                     
                     // Delete button (only if user can delete roles and role is not system protected)
-                    if (auth()->user()->can('delete-roles')) {
-                        $actions .= '<button type="button" class="btn btn-sm btn-danger delete-role" data-id="' . $role->id . '">
-                                <i class="bi bi-trash"></i> Delete
+                    if (auth()->user()->can('delete-roles') && !in_array($role->name, ['Super Admin', 'Admin'])) {
+                        $actions .= '<button type="button" class="btn btn-action btn-sm btn-danger delete-role" data-id="' . $role->id . '" data-bs-toggle="tooltip" title="Hapus Role">
+                                <i class="bi bi-trash"></i>
                             </button>';
                     }
                     
