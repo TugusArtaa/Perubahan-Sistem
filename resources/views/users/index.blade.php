@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'User Management')
+@section('title', 'Manajemen Pengguna')
 
 @section('content')
     <div class="container-fluid">
@@ -9,11 +9,11 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">
-                            <i class="bi bi-people"></i> User Management
+                            <i class="bi bi-people"></i> Manajemen Pengguna
                         </h5>
                         @can('create-users')
                             <a href="{{ route('users.create') }}" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> Add New User
+                                <i class="bi bi-plus-circle"></i> Tambah Pengguna
                             </a>
                         @endcan
                     </div>
@@ -22,12 +22,12 @@
                             <table id="usersTable" class="table table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
+                                        <th>No</th>
+                                        <th>Nama</th>
                                         <th>Email</th>
-                                        <th>Roles</th>
-                                        <th>Created At</th>
-                                        <th>Actions</th>
+                                        <th>Peran</th>
+                                        <th>Tanggal Masuk</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                             </table>

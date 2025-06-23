@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Permission Management')
+@section('title', 'Manajemen Izin')
 
 @section('content')
     <div class="container-fluid">
@@ -9,11 +9,11 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">
-                            <i class="bi bi-key"></i> Permission Management
+                            <i class="bi bi-key"></i> Manajemen Izin
                         </h5>
                         @can('create-permissions')
                             <a href="{{ route('permissions.create') }}" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> Add New Permission
+                                <i class="bi bi-plus-circle"></i> Tambahkan Izin Baru
                             </a>
                         @endcan
                     </div>
@@ -22,11 +22,11 @@
                             <table id="permissionsTable" class="table table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Guard Name</th>
-                                        <th>Created At</th>
-                                        <th>Actions</th>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Guard</th>
+                                        <th>Dibuat Saat</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                             </table>

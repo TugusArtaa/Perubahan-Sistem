@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create User')
+@section('title', 'Tambah Pengguna Baru')
 
 @section('content')
 <div class="container-fluid">
@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="bi bi-plus-circle"></i> Create New User
+                        <i class="bi bi-plus-circle"></i> Tambah Pengguna Baru
                     </h5>
                 </div>
                 <div class="card-body">
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Full Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label">Nama <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                            id="name" name="name" value="{{ old('name') }}" required>
                                     @error('name')
@@ -29,7 +29,7 @@
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="email" class="form-label">Email Address <span class="text-danger">*</span></label>
+                                    <label for="email" class="form-label">Email <span class="text-danger">*</span></label>
                                     <input type="email" class="form-control @error('email') is-invalid @enderror" 
                                            id="email" name="email" value="{{ old('email') }}" required>
                                     @error('email')
@@ -48,12 +48,12 @@
                                     @error('password')
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
-                                    <div class="form-text">Minimum 8 characters required</div>
+                                    <div class="form-text">Minimal 8 karakter</div>
                                 </div>
                             </div>
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="password_confirmation" class="form-label">Confirm Password <span class="text-danger">*</span></label>
+                                    <label for="password_confirmation" class="form-label">Konfirmasi Password <span class="text-danger">*</span></label>
                                     <input type="password" class="form-control" 
                                            id="password_confirmation" name="password_confirmation" required minlength="8">
                                 </div>
@@ -63,7 +63,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label">Assign Roles</label>
+                                    <label class="form-label">Peran</label>
                                     <div class="row">
                                         @foreach($roles as $role)
                                             <div class="col-md-3 mb-2">
@@ -80,8 +80,8 @@
                                     </div>
                                     @if($roles->isEmpty())
                                         <div class="alert alert-info">
-                                            <i class="bi bi-info-circle"></i> No roles available. 
-                                            <a href="{{ route('roles.create') }}">Create roles first</a>.
+                                            <i class="bi bi-info-circle"></i> Peran tidak tersedia. 
+                                            <a href="{{ route('roles.create') }}">Buat Peran Terlebih Dahulu</a>.
                                         </div>
                                     @endif
                                 </div>
@@ -92,10 +92,10 @@
                             <div class="col-md-12">
                                 <div class="d-flex justify-content-between">
                                     <a href="{{ route('users.index') }}" class="btn btn-secondary">
-                                        <i class="bi bi-arrow-left"></i> Back to Users
+                                        <i class="bi bi-arrow-left"></i> Kembali
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-check-circle"></i> Create User
+                                        <i class="bi bi-check-circle"></i> Buat Pengguna
                                     </button>
                                 </div>
                             </div>

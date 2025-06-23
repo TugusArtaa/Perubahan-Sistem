@@ -335,14 +335,14 @@
                     <li class="nav-item mt-3 mb-2">
                         <hr class="w-100 my-2" style="border-color: rgba(255, 255, 255, 0.3);">
                         <h6 class="sidebar-subtitle px-3 mb-2" style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 1px;">
-                            User Management
+                            Manajemen Pengguna
                         </h6>
                     </li>
                     @can('view-users')
                     <li class="nav-item mb-2">
                         <a href="{{ route('users.index') }}" class="nav-link">
                             <i class="bi bi-people icon-size me-2"></i>
-                            Users
+                            Pengguna
                         </a>
                     </li>
                     @endcan
@@ -350,7 +350,7 @@
                     <li class="nav-item mb-2">
                         <a href="{{ route('roles.index') }}" class="nav-link">
                             <i class="bi bi-shield-check icon-size me-2"></i>
-                            Roles
+                            Peran
                         </a>
                     </li>
                     @endcan
@@ -358,7 +358,7 @@
                     <li class="nav-item mb-2">
                         <a href="{{ route('permissions.index') }}" class="nav-link">
                             <i class="bi bi-key icon-size me-2"></i>
-                            Permissions
+                            Izin Peran
                         </a>
                     </li>
                     @endcan
@@ -373,7 +373,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            Profile
+                            Profil
                         </a>
                     </li>
                     @endauth
