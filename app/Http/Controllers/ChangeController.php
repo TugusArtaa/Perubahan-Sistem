@@ -55,21 +55,26 @@ class ChangeController extends Controller
                     return $row->target_release_date ? date('Y-m-d', strtotime($row->target_release_date)) : '-';
                 })
                 ->addColumn('action', function($row) {
-                    $editUrl = route('changes.edit', $row->id);
-                    $deleteUrl = route('application.changes.destroy', ['application' => $row->application_id, 'change' => $row->id]);
+                    $viewUrl = route('changes.show', ['application' => $row->application_id, 'change' => $row->id]);
+                    $editUrl = route('changes.edit', ['application' => $row->application_id, 'change' => $row->id]);
                     
-                    $actions = '<div class="text-center">';
+                    $actions = '<div class="btn-group-actions">';
+                    
+                    // View button
+                    $actions .= '<a href="' . $viewUrl . '" class="btn btn-action btn-sm btn-info" data-bs-toggle="tooltip" title="Lihat Detail">
+                            <i class="bi bi-eye"></i>
+                        </a>';
                     
                     // Edit button (only if user can edit changes)
                     if (auth()->user()->can('edit-changes')) {
-                        $actions .= '<a href="' . $editUrl . '" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Edit Perubahan">
+                        $actions .= '<a href="' . $editUrl . '" class="btn btn-action btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit Perubahan">
                                 <i class="bi bi-pencil"></i>
                             </a>';
                     }
                     
                     // Delete button (only if user can delete changes)
                     if (auth()->user()->can('delete-changes')) {
-                        $actions .= '<button type="button" class="btn btn-sm btn-danger" onclick="deleteChange(' . $row->id . ', ' . $row->application_id . ')" data-bs-toggle="tooltip" title="Hapus Perubahan">
+                        $actions .= '<button type="button" class="btn btn-action btn-sm btn-danger" onclick="deleteChange(' . $row->id . ', ' . $row->application_id . ')" data-bs-toggle="tooltip" title="Hapus Perubahan">
                                 <i class="bi bi-trash"></i>
                             </button>';
                     }

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Role')
+@section('title', 'Buat Peran Baru')
 
 @section('content')
 <div class="container-fluid">
@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="bi bi-plus-circle"></i> Create New Role
+                        <i class="bi bi-plus-circle"></i> Buat Peran Baru
                     </h5>
                 </div>
                 <div class="card-body">
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Role Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label">Nama Peran <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                            id="name" name="name" value="{{ old('name') }}" required>
                                     @error('name')
@@ -30,8 +30,8 @@
                         </div>                        <div class="row">
                             <div class="col-md-12">
                                 <div class="mb-3">
-                                    <label class="form-label">Permissions</label>
-                                    <div class="row permission-grid">
+                                    <label class="form-label">Izin</label>
+                                    <div class="row">
                                         @foreach($permissions as $permission)
                                             <div class="col-lg-3 col-md-4 col-sm-6 col-12 mb-2">
                                                 <div class="form-check">
@@ -47,8 +47,8 @@
                                     </div>
                                     @if($permissions->isEmpty())
                                         <div class="alert alert-info">
-                                            <i class="bi bi-info-circle"></i> No permissions available. 
-                                            <a href="{{ route('permissions.create') }}">Create permissions first</a>.
+                                            <i class="bi bi-info-circle"></i> Izin Tidak Tersedia
+                                            <a href="{{ route('permissions.create') }}">Buatkan Izin Terlebih Dahulu</a>.
                                         </div>
                                     @endif
                                 </div>
@@ -57,12 +57,12 @@
 
                         <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-between flex-column flex-sm-row">
-                                    <a href="{{ route('roles.index') }}" class="btn btn-secondary mb-2 mb-sm-0">
-                                        <i class="bi bi-arrow-left"></i> Back to Roles
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('roles.index') }}" class="btn btn-secondary">
+                                        <i class="bi bi-arrow-left"></i> Kembali ke Peran
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-check-circle"></i> Create Role
+                                        <i class="bi bi-check-circle"></i> Buat Role
                                     </button>
                                 </div>
                             </div>

@@ -475,18 +475,89 @@
             language: {
                 url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
             },
-            scrollX: true,
-            scrollCollapse: true,
-            responsive: false, // Disable responsive, use scrollX instead
-            autoWidth: false,
-            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
-                '<"row"<"col-sm-12"tr>>' +
-                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-            drawCallback: function() {
-                // Initialize tooltips after each draw
-                $('[data-bs-toggle="tooltip"]').tooltip();
-            }
-        });
+            {
+                data: 'tingkat_kepentingan_badge',
+                name: 'tingkat_kepentingan',
+                className: 'text-center',
+                orderable: false,
+                width: '100px'
+            },
+            {
+                data: 'approval_status_badge',
+                name: 'approval_status',
+                className: 'text-center',
+                orderable: false,
+                width: '90px'
+            },
+            {
+                data: 'approval',
+                name: 'approval',
+                orderable: false,
+                searchable: false,
+                className: 'text-center',
+                width: '140px'
+            },
+            {
+                data: 'formatted_request_date',
+                name: 'request_date',
+                className: 'text-center',
+                width: '110px'
+            },
+            {
+                data: 'version',
+                name: 'version',
+                className: 'text-center',
+                width: '80px'
+            },
+            {
+                data: 'formatted_approval_date',
+                name: 'approval_date',
+                className: 'text-center',
+                width: '110px'
+            },
+            {
+                data: 'formatted_target_date',
+                name: 'target_release_date',
+                className: 'text-center',
+                width: '110px'
+            },
+            {
+                data: 'action',
+                name: 'action',
+                orderable: false,
+                searchable: false,
+                className: 'text-center',
+                width: '140px'
+            },
+        ],
+        order: [[6, 'desc']], // Order by request_date descending
+        pageLength: 25,
+        lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
+        language: {
+            url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+        },
+        scrollX: true,
+        scrollCollapse: true,
+        responsive: false, // Disable responsive, use scrollX instead
+        autoWidth: false,
+        columnDefs: [
+            {
+                targets: [10], // Action column
+                responsivePriority: 1,
+                width: "120px",
+                orderable: false,
+                searchable: false,
+                className: 'text-center align-middle'
+            },
+            // ... other column definitions
+        ],
+        dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+             '<"row"<"col-sm-12"tr>>' +
+             '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+        drawCallback: function() {
+            // Initialize tooltips after each draw
+            $('[data-bs-toggle="tooltip"]').tooltip();
+        }
     });
 
     // Delete function for changes

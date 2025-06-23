@@ -24,38 +24,39 @@ class ApplicationController extends Controller
             return DataTables::of($data)
                 ->addIndexColumn()
                 ->addColumn('action', function($row) {
-                    $actions = '<div class="text-center">';
-                    
-                    // Catalog button (always available for those who can view applications)
+                    $actions = '<div class="text-center">
+                        <div class="d-flex flex-wrap justify-content-center gap-1" style="max-width: 100px;">';
+
+                    // Catalog button (always available)
                     $catalogUrl = route('applications.catalog', $row->id);
-                    $actions .= '<a href="' . $catalogUrl . '" class="btn btn-sm btn-primary me-1" data-bs-toggle="tooltip" title="Katalog Aplikasi">
+                    $actions .= '<a href="' . $catalogUrl . '" class="btn btn-sm btn-primary" data-bs-toggle="tooltip" title="Katalog Aplikasi">
                             <i class="bi bi-book"></i>
                         </a>';
-                    
-                    // Edit button (only if user can edit applications)
+
+                    // Edit button
                     if (auth()->user()->can('edit-applications')) {
                         $editUrl = route('applications.edit', $row->id);
-                        $actions .= '<a href="' . $editUrl . '" class="btn btn-sm btn-warning me-1" data-bs-toggle="tooltip" title="Edit Aplikasi">
+                        $actions .= '<a href="' . $editUrl . '" class="btn btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit Aplikasi">
                                 <i class="bi bi-pencil"></i>
                             </a>';
                     }
-                    
-                    // Add change button (only if user can create changes)
+
+                    // Add change button
                     if (auth()->user()->can('create-changes')) {
                         $changeUrl = route('application.changes.create', $row->id);
-                        $actions .= '<a href="' . $changeUrl . '" class="btn btn-sm btn-info me-1" data-bs-toggle="tooltip" title="Tambah Perubahan">
+                        $actions .= '<a href="' . $changeUrl . '" class="btn btn-sm btn-info" data-bs-toggle="tooltip" title="Tambah Perubahan">
                                 <i class="bi bi-plus-circle"></i>
                             </a>';
                     }
-                    
-                    // Delete button (only if user can delete applications)
+
+                    // Delete button
                     if (auth()->user()->can('delete-applications')) {
                         $actions .= '<button type="button" class="btn btn-sm btn-danger" onclick="deleteApplication(' . $row->id . ')" data-bs-toggle="tooltip" title="Hapus Aplikasi">
                                 <i class="bi bi-trash"></i>
                             </button>';
                     }
-                    
-                    $actions .= '</div>';
+
+                    $actions .= '</div></div>';
                     return $actions;
                 })
                 ->rawColumns(['action'])

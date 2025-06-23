@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Role Management')
+@section('title', 'Manajemen Peran')
 
 @push('styles')
 <style>
@@ -116,11 +116,11 @@
                 <div class="card">
                     <div class="card-header d-flex justify-content-between align-items-center">
                         <h5 class="card-title mb-0">
-                            <i class="bi bi-shield-check"></i> Role Management
+                            <i class="bi bi-shield-check"></i> Manajemen Peran
                         </h5>
                         @can('create-roles')
                             <a href="{{ route('roles.create') }}" class="btn btn-primary">
-                                <i class="bi bi-plus-circle"></i> Add New Role
+                                <i class="bi bi-plus-circle"></i> Tambah Peran Baru
                             </a>
                         @endcan
                     </div>
@@ -129,11 +129,11 @@
                             <table id="rolesTable" class="table table-hover">
                                 <thead class="table-light">
                                     <tr>
-                                        <th>ID</th>
-                                        <th>Name</th>
-                                        <th>Permissions</th>
-                                        <th>Created At</th>
-                                        <th>Actions</th>
+                                        <th>No</th>
+                                        <th>Nama</th>
+                                        <th>Izin</th>
+                                        <th>Dibuat Saat</th>
+                                        <th>Aksi</th>
                                     </tr>
                                 </thead>
                             </table>

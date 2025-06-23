@@ -17,26 +17,29 @@ class PermissionController extends Controller
             $permissions = Permission::all();
             
             return DataTables::of($permissions)
+                ->editColumn('created_at', function ($user) {
+                    return $user->created_at->format('M d, Y H:i');
+                })
                 ->addColumn('action', function ($permission) {
-                    $actions = '<div class="btn-group" role="group">';
+                    $actions = '<div class="btn-group-actions">';
                     
-                    // Edit button (only if user can edit permissions)
-                    if (auth()->user()->can('edit-permissions')) {
-                        $actions .= '<a href="' . route('permissions.edit', $permission->id) . '" class="btn btn-sm btn-warning">
-                                <i class="bi bi-pencil"></i> Edit
-                            </a>';
-                    }
-                    
-                    // Delete button (only if user can delete permissions and permission is not system protected)
+                    // Edit button (only if user can edit permissions and permission is not system protected)
                     $systemPermissions = ['view-users', 'create-users', 'edit-users', 'delete-users', 
                                         'view-roles', 'create-roles', 'edit-roles', 'delete-roles',
                                         'view-permissions', 'create-permissions', 'edit-permissions', 'delete-permissions',
                                         'view-applications', 'create-applications', 'edit-applications', 'delete-applications',
                                         'view-changes', 'create-changes', 'edit-changes', 'delete-changes', 'approve-changes'];
                     
-                    if (auth()->user()->can('delete-permissions')) {
-                        $actions .= '<button type="button" class="btn btn-sm btn-danger delete-permission" data-id="' . $permission->id . '">
-                                <i class="bi bi-trash"></i> Delete
+                    if (auth()->user()->can('edit-permissions') && !in_array($permission->name, $systemPermissions)) {
+                        $actions .= '<a href="' . route('permissions.edit', $permission->id) . '" class="btn btn-action btn-sm btn-warning" data-bs-toggle="tooltip" title="Edit Permission">
+                                <i class="bi bi-pencil"></i>
+                            </a>';
+                    }
+                    
+                    // Delete button (only if user can delete permissions and permission is not system protected)
+                    if (auth()->user()->can('delete-permissions') && !in_array($permission->name, $systemPermissions)) {
+                        $actions .= '<button type="button" class="btn btn-action btn-sm btn-danger delete-permission" data-id="' . $permission->id . '" data-bs-toggle="tooltip" title="Hapus Permission">
+                                <i class="bi bi-trash"></i>
                             </button>';
                     }
                     

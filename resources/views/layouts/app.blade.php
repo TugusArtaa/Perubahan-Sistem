@@ -465,126 +465,96 @@
         text-align: center;
     }
 
-    /* Touch device optimizations */
-    .touch-device .btn,
-    .touch-device .nav-link,
-    .touch-device .dropdown-toggle {
-        min-height: 44px;
-        padding: 0.5rem 1rem;
+    /* DataTables Action Button Alignment Fix */
+    .dataTables_wrapper .dataTable td {
+        vertical-align: middle !important;
     }
 
-    .touch-device .btn-sm {
-        min-height: 36px;
-        padding: 0.25rem 0.5rem;
+    /* Action buttons container */
+    .btn-group-actions {
+        display: flex;
+        gap: 0.25rem;
+        justify-content: center;
+        align-items: center;
+        flex-wrap: nowrap;
     }
 
-    /* DataTables mobile optimizations */
+    /* Mobile responsive action buttons */
     @media (max-width: 768px) {
-        .dataTables_wrapper {
+        /* Action column specific styling */
+        .dataTables_wrapper .dataTable td:last-child,
+        .dataTables_wrapper .dataTable th:last-child {
+            text-align: center !important;
+            vertical-align: middle !important;
+            padding: 0.5rem 0.25rem !important;
+        }
+        
+        /* Action buttons in mobile */
+        .btn-action {
+            padding: 0.25rem 0.4rem !important;
+            font-size: 0.7rem !important;
+            margin: 0.1rem !important;
+            min-width: 32px;
+            height: 32px;
+            display: inline-flex;
+            align-items: center;
+            justify-content: center;
+            vertical-align: middle;
+        }
+        
+        /* Button group for actions */
+        .btn-group-actions {
+            display: flex;
+            gap: 0.2rem;
+            justify-content: center;
+            align-items: center;
+            flex-wrap: wrap;
+            max-width: 100px;
+            margin: 0 auto;
+        }
+        
+        /* Ensure buttons don't break layout */
+        .btn-group-actions .btn {
+            flex: 0 0 auto;
+            white-space: nowrap;
+        }
+    }
+
+    @media (max-width: 576px) {
+        .btn-action {
+            padding: 0.2rem 0.3rem !important;
+            font-size: 0.65rem !important;
+            min-width: 28px;
+            height: 28px;
+        }
+        
+        .btn-group-actions {
+            gap: 0.1rem;
+            max-width: 90px;
+        }
+    }
+
+    @media (max-width: 768px) {
+        .dataTables_wrapper .dataTable {
             font-size: 0.8rem;
         }
         
-        .dataTables_wrapper .dataTables_length select,
-        .dataTables_wrapper .dataTables_filter input {
-            font-size: 0.8rem;
-            padding: 0.25rem 0.5rem;
+        .dataTables_wrapper .dataTable th,
+        .dataTables_wrapper .dataTable td {
+            padding: 0.5rem 0.25rem;
+            word-wrap: break-word;
+            max-width: 150px;
         }
         
-        table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control,
-        table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control {
-            position: relative;
-            padding-left: 30px;
+        /* Action column specific */
+        .dataTables_wrapper .dataTable td.text-center:last-child {
+            position: sticky;
+            right: 0;
+            background: white;
+            z-index: 1;
+            box-shadow: -2px 0 5px rgba(0,0,0,0.1);
         }
-        
-        table.dataTable.dtr-inline.collapsed > tbody > tr > td.dtr-control:before,
-        table.dataTable.dtr-inline.collapsed > tbody > tr > th.dtr-control:before {
-            top: 50%;
-            left: 5px;
-            height: 1em;
-            width: 1em;
-            margin-top: -0.5em;
-            display: block;
-            position: absolute;
-            color: white;
-            border: 0.15em solid white;
-            border-radius: 1em;
-            box-shadow: 0 0 0.2em #444;
-            box-sizing: content-box;
-            text-align: center;
-            text-indent: 0 !important;
-            font-family: 'Courier New', Courier, monospace;
-            line-height: 1em;
-            content: '+';
-            background-color: #31b131;
-        }
-    }        /* Extra small devices optimization */
-        @media (max-width: 576px) {
-            .header h4 {
-                font-size: 0.8rem;
-                max-width: calc(100vw - 100px);
-                margin-left: 25px;
-            }
-            
-            .header .dropdown-toggle {
-                padding: 0.15rem;
-                font-size: 0;
-            }
-            
-            .header .bg-success.rounded-circle {
-                width: 26px !important;
-                height: 26px !important;
-            }
-            
-            .header .bg-success.rounded-circle i {
-                font-size: 0.75rem;
-            }
-            
-            .logo {
-                width: 28px;
-                height: 28px;
-            }
-            
-            .header {
-                padding: 6px 10px;
-                min-height: 50px;
-            }
-            
-            .content {
-                margin-top: 65px;
-                min-height: calc(100vh - 65px);
-            }
-        }        /* Landscape mobile optimization */
-        @media (max-width: 768px) and (orientation: landscape) {
-            .header {
-                min-height: 45px;
-                padding: 4px 12px;
-            }
-            
-            .header h4 {
-                font-size: 0.75rem;
-                margin-left: 20px;
-                max-width: calc(100vw - 90px);
-            }
-            
-            .header .bg-success.rounded-circle {
-                width: 24px !important;
-                height: 24px !important;
-            }
-            
-            .header .bg-success.rounded-circle i {
-                font-size: 0.7rem;
-            }
-            
-            .logo {
-                width: 26px;
-                height: 26px;
-            }
-            
-            .content {
-                margin-top: 55px;
-                min-height: calc(100vh - 55px);
-            }
-        }
+    }
     </style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
@@ -649,14 +619,14 @@
                     <li class="nav-item mt-3 mb-2">
                         <hr class="w-100 my-2" style="border-color: rgba(255, 255, 255, 0.3);">
                         <h6 class="sidebar-subtitle px-3 mb-2" style="font-size: 0.75rem; color: rgba(255, 255, 255, 0.7); text-transform: uppercase; letter-spacing: 1px;">
-                            User Management
+                            Manajemen Pengguna
                         </h6>
                     </li>
                     @can('view-users')
                     <li class="nav-item mb-2">
                         <a href="{{ route('users.index') }}" class="nav-link">
                             <i class="bi bi-people icon-size me-2"></i>
-                            Users
+                            Pengguna
                         </a>
                     </li>
                     @endcan
@@ -664,7 +634,7 @@
                     <li class="nav-item mb-2">
                         <a href="{{ route('roles.index') }}" class="nav-link">
                             <i class="bi bi-shield-check icon-size me-2"></i>
-                            Roles
+                            Peran
                         </a>
                     </li>
                     @endcan
@@ -672,7 +642,7 @@
                     <li class="nav-item mb-2">
                         <a href="{{ route('permissions.index') }}" class="nav-link">
                             <i class="bi bi-key icon-size me-2"></i>
-                            Permissions
+                            Izin Peran
                         </a>
                     </li>
                     @endcan
@@ -687,7 +657,7 @@
                                 <path stroke-linecap="round" stroke-linejoin="round"
                                     d="M17.982 18.725A7.488 7.488 0 0012 15.75a7.488 7.488 0 00-5.982 2.975m11.963 0a9 9 0 10-11.963 0m11.963 0A8.966 8.966 0 0112 21a8.966 8.966 0 01-5.982-2.275M15 9.75a3 3 0 11-6 0 3 3 0 016 0z" />
                             </svg>
-                            Profile
+                            Profil
                         </a>
                     </li>
                     @endauth

@@ -1,6 +1,6 @@
 @extends('layouts.app')
 
-@section('title', 'Create Permission')
+@section('title', 'Buat Izin')
 
 @section('content')
 <div class="container-fluid">
@@ -9,7 +9,7 @@
             <div class="card">
                 <div class="card-header">
                     <h5 class="card-title mb-0">
-                        <i class="bi bi-plus-circle"></i> Create New Permission
+                        <i class="bi bi-plus-circle"></i> Buat Izin Baru
                     </h5>
                 </div>
                 <div class="card-body">
@@ -19,7 +19,7 @@
                         <div class="row">
                             <div class="col-md-6">
                                 <div class="mb-3">
-                                    <label for="name" class="form-label">Permission Name <span class="text-danger">*</span></label>
+                                    <label for="name" class="form-label">Nama Izin <span class="text-danger">*</span></label>
                                     <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                            id="name" name="name" value="{{ old('name') }}" 
                                            placeholder="e.g., create-users, view-reports" required>
@@ -27,7 +27,7 @@
                                         <div class="invalid-feedback">{{ $message }}</div>
                                     @enderror
                                     <div class="form-text">
-                                        Use lowercase with hyphens (e.g., create-users, edit-posts, view-dashboard)
+                                        Gunakan huruf kecil dengan tanda minus (contoh: create-users, edit-posts, view-dashboard)
                                     </div>
                                 </div>
                             </div>
@@ -36,7 +36,7 @@
                         <div class="row">
                             <div class="col-md-12">
                                 <div class="alert alert-info">
-                                    <h6><i class="bi bi-lightbulb"></i> Common Permission Examples:</h6>
+                                    <h6><i class="bi bi-lightbulb"></i> Contoh Izin:</h6>
                                     <ul class="mb-0">
                                         <li><strong>Users:</strong> view-users, create-users, edit-users, delete-users</li>
                                         <li><strong>Applications:</strong> view-applications, create-applications, edit-applications, delete-applications</li>
@@ -48,12 +48,12 @@
                             </div>
                         </div>                        <div class="row">
                             <div class="col-md-12">
-                                <div class="d-flex justify-content-between flex-column flex-sm-row">
-                                    <a href="{{ route('permissions.index') }}" class="btn btn-secondary mb-2 mb-sm-0">
-                                        <i class="bi bi-arrow-left"></i> Back to Permissions
+                                <div class="d-flex justify-content-between">
+                                    <a href="{{ route('permissions.index') }}" class="btn btn-secondary">
+                                        <i class="bi bi-arrow-left"></i> Kembali
                                     </a>
                                     <button type="submit" class="btn btn-primary">
-                                        <i class="bi bi-check-circle"></i> Create Permission
+                                        <i class="bi bi-check-circle"></i> Buat Izin
                                     </button>
                                 </div>
                             </div>
