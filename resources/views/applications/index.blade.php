@@ -8,6 +8,9 @@
 <div class="container-fluid">
     <div class="d-flex justify-content-between align-items-center mb-4">
         <h2 class="text-success">Daftar Aplikasi</h2>
+    </div>
+
+    <div class="d-flex justify-content-start" style="margin-left:85%; margin-bottom: 0.5rem;">
         @can('create-applications')
         <a href="{{ route('applications.create') }}" class="btn btn-success">
             <i class="bi bi-plus-circle me-1"></i>
@@ -15,7 +18,6 @@
         </a>
         @endcan
     </div>
-
     <div class="card border-0 shadow-sm">
         <div class="card-body">
             <div class="table-responsive">
@@ -98,7 +100,7 @@
             lengthMenu: [[10, 25, 50, 100], [10, 25, 50, 100]],
             language: {
                 processing: "Memuat data...",
-                search: "Cari:",
+                search: "",
                 lengthMenu: "Tampilkan _MENU_ data per halaman",
                 info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
                 infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
@@ -109,15 +111,17 @@
                     next: "Selanjutnya",
                     previous: "Sebelumnya"
                 },
-                emptyTable: "Tidak ada data aplikasi",
+                emptyTable: "Tidak ada data yang tersedia",
                 zeroRecords: "Tidak ada data yang cocok dengan pencarian"
             },
-            dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
+            dom: '<"row align-items-center"<"col-12 col-md-6 d-flex justify-content-start"f><"col-12 col-md-6 text-end"l>>' +
                 '<"row"<"col-sm-12"tr>>' +
                 '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
             drawCallback: function(settings) {
-                // Re-initialize tooltips
+                // Re-initialize tooltips if any
                 $('[data-bs-toggle="tooltip"]').tooltip();
+                // Set placeholder for search input
+                $(this.api().table().container()).find('input[type="search"]').attr('placeholder', 'Pencarian');
             }
         });
     });

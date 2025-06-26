@@ -280,6 +280,21 @@
         }
     }
     </style>
+    <style>
+    /* Global DataTables search box style */
+.dataTables_filter label > input[type="search"] {
+    border-radius: 2rem !important;
+    border: 1px solid #ced4da;
+    padding: 0.5rem 1.5rem;
+    width: 400px !important;
+    max-width: 100%;
+    margin-left: 0 !important;
+    font-size: 1rem;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: border-color 0.2s;
+}
+    </style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 

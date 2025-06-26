@@ -178,6 +178,34 @@
         border: 1px solid #ced4da;
         padding: 0.375rem 0.75rem;
     }
+
+    /* Custom: force DataTables search box to left */
+    .dataTables-search-left {
+        justify-content: flex-start !important;
+        display: flex !important;
+        padding-left: 0 !important;
+    }
+
+    /* Custom: Remove the search label, round and lengthen the search input */
+    .dataTables-search-left label {
+        width: 100%;
+        margin-bottom: 0;
+    }
+    .dataTables-search-left label > input[type="search"] {
+        border-radius: 2rem !important;
+        border: 1px solid #ced4da;
+        padding: 0.5rem 1.5rem;
+        width: 400px !important;
+        max-width: 100%;
+        margin-left: 0 !important;
+        font-size: 1rem;
+        background: #fff;
+        box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+        transition: border-color 0.2s;
+    }
+    .dataTables-search-left label > span {
+        display: none !important;
+    }
 </style>
 @endpush
 
@@ -281,9 +309,9 @@ $(document).ready(function() {
         order: [[6, 'desc']], // Order by request_date descending
         pageLength: 25,
         lengthMenu: [[10, 25, 50, 100, -1], [10, 25, 50, 100, "Semua"]],
-        language: {
-            url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
-        },
+        // language: {
+        //     url: 'https://cdn.datatables.net/plug-ins/1.13.7/i18n/id.json'
+        // },
         scrollX: true,
         scrollCollapse: true,
         responsive: false, // Disable responsive, use scrollX instead
@@ -299,13 +327,31 @@ $(document).ready(function() {
             },
             // ... other column definitions
         ],
-        dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
-             '<"row"<"col-sm-12"tr>>' +
-             '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-        drawCallback: function() {
-            // Initialize tooltips after each draw
-            $('[data-bs-toggle="tooltip"]').tooltip();
-        }
+        language: {
+                processing: "Memuat data...",
+                search: "",
+                lengthMenu: "Tampilkan _MENU_ data per halaman",
+                info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                infoFiltered: "(difilter dari _MAX_ total data)",
+                paginate: {
+                    first: "Pertama",
+                    last: "Terakhir",
+                    next: "Selanjutnya",
+                    previous: "Sebelumnya"
+                },
+                emptyTable: "Tidak ada data yang tersedia",
+                zeroRecords: "Tidak ada data yang cocok dengan pencarian"
+            },
+            dom: '<"row align-items-center"<"col-12 col-md-6 d-flex justify-content-start"f><"col-12 col-md-6 text-end"l>>' +
+                '<"row"<"col-sm-12"tr>>' +
+                '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+            drawCallback: function(settings) {
+                // Re-initialize tooltips if any
+                $('[data-bs-toggle="tooltip"]').tooltip();
+                // Set placeholder for search input
+                $(this.api().table().container()).find('input[type="search"]').attr('placeholder', 'Pencarian');
+            }
     });
 });
 

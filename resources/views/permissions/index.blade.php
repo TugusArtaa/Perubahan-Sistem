@@ -74,7 +74,29 @@
                     [0, 'desc']
                 ],
                 language: {
-                    processing: '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>'
+                    processing: "Memuat data...",
+                    search: "",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
+                    paginate: {
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    },
+                    emptyTable: "Tidak ada data yang tersedia",
+                    zeroRecords: "Tidak ada data yang cocok dengan pencarian"
+                },
+                dom: '<"row align-items-center"<"col-12 col-md-6 d-flex justify-content-start"f><"col-12 col-md-6 text-end"l>>' +
+                    '<"row"<"col-sm-12"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                drawCallback: function(settings) {
+                    // Re-initialize tooltips if any
+                    $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Set placeholder for search input
+                    $(this.api().table().container()).find('input[type="search"]').attr('placeholder', 'Pencarian');
                 }
             });
 
