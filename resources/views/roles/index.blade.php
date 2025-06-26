@@ -2,113 +2,6 @@
 
 @section('title', 'Manajemen Peran')
 
-@push('styles')
-<style>
-    /* Mobile responsive adjustments for roles table */
-    @media (max-width: 768px) {
-        .container-fluid {
-            padding-left: 1rem;
-            padding-right: 1rem;
-        }
-        
-        .card-header {
-            flex-direction: column;
-            align-items: flex-start !important;
-            gap: 1rem;
-        }
-        
-        .card-header .btn {
-            width: 100%;
-        }
-        
-        .table-responsive {
-            margin: 0.5rem;
-        }
-        
-        #rolesTable {
-            font-size: 0.8rem;
-        }
-        
-        #rolesTable th,
-        #rolesTable td {
-            padding: 0.5rem 0.25rem;
-        }
-        
-        .btn-sm {
-            padding: 0.2rem 0.4rem;
-            font-size: 0.7rem;
-        }
-        
-        .card-body {
-            padding: 1rem;
-        }
-    }
-    
-    @media (max-width: 576px) {
-        #rolesTable {
-            font-size: 0.7rem;
-        }
-        
-        #rolesTable th,
-        #rolesTable td {
-            padding: 0.3rem 0.15rem;
-        }
-        
-        .btn-sm {
-            padding: 0.15rem 0.3rem;
-            font-size: 0.65rem;
-        }
-        
-        .btn-sm i {
-            font-size: 0.7rem;
-        }
-        
-        .card-body {
-            padding: 0.75rem;
-        }
-    }
-    
-    /* DataTables responsive styling */
-    .dataTables_wrapper .dataTables_filter input {
-        margin-left: 0.5rem;
-        border-radius: 0.375rem;
-        border: 1px solid #ced4da;
-        padding: 0.375rem 0.75rem;
-    }
-    
-    .dataTables_wrapper .dataTables_length select {
-        margin: 0 0.5rem;
-        border-radius: 0.375rem;
-        border: 1px solid #ced4da;
-        padding: 0.375rem 0.75rem;
-    }
-    
-    @media (max-width: 768px) {
-        .dataTables_wrapper .dataTables_filter,
-        .dataTables_wrapper .dataTables_length {
-            text-align: center;
-            margin-bottom: 1rem;
-        }
-        
-        .dataTables_wrapper .dataTables_info,
-        .dataTables_wrapper .dataTables_paginate {
-            text-align: center;
-            margin-top: 1rem;
-        }
-        
-        .dataTables_wrapper .dataTables_paginate .pagination {
-            justify-content: center;
-            flex-wrap: wrap;
-        }
-        
-        .dataTables_wrapper .dataTables_paginate .page-link {
-            padding: 0.4rem 0.6rem;
-            font-size: 0.8rem;
-        }
-    }
-</style>
-@endpush
-
 @section('content')
     <div class="container-fluid">
         <div class="row">
@@ -146,100 +39,66 @@
 @endsection
 
 @push('scripts')
-    <script>        $(document).ready(function() {
+    <script>
+        $(document).ready(function() {
             // Initialize DataTable
             var table = $('#rolesTable').DataTable({
                 processing: true,
                 serverSide: true,
                 ajax: "{{ route('roles.data') }}",
                 responsive: true,
-                scrollX: true,
-                columnDefs: [
-                    {
-                        targets: [0], // ID column
-                        responsivePriority: 1,
-                        width: "8%"
-                    },
-                    {
-                        targets: [1], // Name column
-                        responsivePriority: 2,
-                        width: "20%"
-                    },
-                    {
-                        targets: [4], // Actions column
-                        responsivePriority: 1,
-                        width: "15%"
-                    },
-                    {
-                        targets: [2], // Permissions column
-                        responsivePriority: 8,
-                        width: "40%"
-                    },
-                    {
-                        targets: [3], // Created At column
-                        responsivePriority: 10,
-                        width: "17%"
-                    }
-                ],
                 columns: [{
                         data: 'id',
-                        name: 'id',
-                        className: 'text-center'
+                        name: 'id'
                     },
                     {
                         data: 'name',
-                        name: 'name',
-                        className: 'text-start fw-bold'
+                        name: 'name'
                     },
                     {
                         data: 'permissions',
                         name: 'permissions',
                         orderable: false,
-                        searchable: false,
-                        className: 'text-start',
-                        render: function(data, type, row) {
-                            if (type === 'display' && data && data.length > 50) {
-                                return '<span title="' + data + '" class="text-truncate d-inline-block" style="max-width: 200px;">' + data + '</span>';
-                            }
-                            return data || 'No permissions';
-                        }
+                        searchable: false
                     },
                     {
                         data: 'created_at',
-                        name: 'created_at',
-                        className: 'text-center'
+                        name: 'created_at'
                     },
                     {
                         data: 'action',
                         name: 'action',
                         orderable: false,
-                        searchable: false,
-                        className: 'text-center'
+                        searchable: false
                     }
                 ],
                 order: [
                     [0, 'desc']
                 ],
                 language: {
-                    processing: '<div class="d-flex justify-content-center"><div class="spinner-border" role="status"><span class="visually-hidden">Loading...</span></div></div>',
-                    search: "Search:",
-                    lengthMenu: "Show _MENU_ entries",
-                    info: "Showing _START_ to _END_ of _TOTAL_ entries",
-                    infoEmpty: "Showing 0 to 0 of 0 entries",
-                    emptyTable: "No roles available",
+                    processing: "Memuat data...",
+                    search: "",
+                    lengthMenu: "Tampilkan _MENU_ data per halaman",
+                    info: "Menampilkan _START_ sampai _END_ dari _TOTAL_ data",
+                    infoEmpty: "Menampilkan 0 sampai 0 dari 0 data",
+                    infoFiltered: "(difilter dari _MAX_ total data)",
                     paginate: {
-                        first: "First",
-                        last: "Last",
-                        next: "Next",
-                        previous: "Previous"
-                    }
+                        first: "Pertama",
+                        last: "Terakhir",
+                        next: "Selanjutnya",
+                        previous: "Sebelumnya"
+                    },
+                    emptyTable: "Tidak ada data yang tersedia",
+                    zeroRecords: "Tidak ada data yang cocok dengan pencarian"
                 },
-                dom: '<"row"<"col-sm-12 col-md-6"l><"col-sm-12 col-md-6"f>>' +
-                     '<"row"<"col-sm-12"tr>>' +
-                     '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
-                drawCallback: function() {
-                    // Initialize tooltips after each draw
+                dom: '<"row align-items-center"<"col-12 col-md-6 d-flex justify-content-start"f><"col-12 col-md-6 text-end"l>>' +
+                    '<"row"<"col-sm-12"tr>>' +
+                    '<"row"<"col-sm-12 col-md-5"i><"col-sm-12 col-md-7"p>>',
+                drawCallback: function(settings) {
+                    // Re-initialize tooltips if any
                     $('[data-bs-toggle="tooltip"]').tooltip();
+                    // Set placeholder for search input
+                    $(this.api().table().container()).find('input[type="search"]').attr('placeholder', 'Pencarian');
                 }
             });
 

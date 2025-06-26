@@ -73,8 +73,8 @@
                             </div>
                         </div>
 
-                        <div class="mt-4 d-flex justify-content-end flex-column flex-sm-row">
-                            <button type="submit" class="btn btn-tambah me-0 me-sm-2 mb-2 mb-sm-0" id="submitBtn">
+                        <div class="mt-4 d-flex justify-content-end">
+                            <button type="submit" class="btn btn-tambah me-2" id="submitBtn">
                                 <i class="bi bi-save me-1"></i>Simpan
                             </button>
                             <a href="{{ route('applications.index') }}" class="btn btn-secondary">
@@ -87,80 +87,6 @@
         </div>
     </div>
 </div>
-
-<style>
-/* Mobile Responsive Styles for Changes Forms */
-@media (max-width: 768px) {
-    .card-body {
-        padding: 1.5rem !important;
-    }
-    
-    .card-body h4 {
-        font-size: 1.3rem;
-        margin-bottom: 1.5rem !important;
-    }
-    
-    .form-label {
-        font-weight: 600;
-        font-size: 0.9rem;
-        margin-bottom: 0.5rem;
-    }
-    
-    .form-control, .form-select {
-        font-size: 0.9rem;
-        padding: 0.6rem 0.75rem;
-    }
-    
-    textarea.form-control {
-        min-height: 120px;
-    }
-    
-    .btn {
-        padding: 0.6rem 1.2rem;
-        font-size: 0.9rem;
-        width: 100%;
-        margin-bottom: 0.5rem;
-    }
-    
-    .d-flex.justify-content-end {
-        gap: 0.5rem;
-    }
-}
-
-@media (max-width: 576px) {
-    .container-fluid {
-        padding: 0.5rem;
-    }
-    
-    .card {
-        margin: 0;
-        border-radius: 0.5rem;
-    }
-    
-    .card-body {
-        padding: 1rem !important;
-    }
-    
-    .card-body h4 {
-        font-size: 1.2rem;
-        text-align: center;
-        line-height: 1.4;
-    }
-    
-    .form-control, .form-select {
-        font-size: 16px; /* Prevents zoom on iOS */
-    }
-    
-    .btn-tambah, .btn-secondary {
-        font-size: 1rem;
-        padding: 0.75rem 1rem;
-    }
-    
-    .row.mb-3 {
-        margin-bottom: 1rem !important;
-    }
-}
-</style>
 @endsection
 
 @push('scripts')

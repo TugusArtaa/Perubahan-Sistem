@@ -3,7 +3,7 @@
 
 <head>
     <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0, maximum-scale=1.0, user-scalable=no">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <meta name="csrf-token" content="{{ csrf_token() }}">
     <title>@yield('title')</title>
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -73,7 +73,6 @@
         display: flex;
         flex-direction: column;
         align-items: center;
-        z-index: 1050;
     }
 
     .sidebar-title {
@@ -111,7 +110,6 @@
     .main-content {
         padding: 40px;
         margin-left: 230px;
-        transition: margin-left 0.3s;
     }
 
     .header {
@@ -123,14 +121,10 @@
         z-index: 1000;
         padding: 20px;
         border-bottom: 1px solid #ddd;
-        transition: left 0.3s;
-        box-shadow: 0 2px 4px rgba(0,0,0,0.1);
-        height: 80px;
     }
 
     .content {
-        margin-top: 120px;
-        min-height: calc(100vh - 120px);
+        margin-top: 100px;
     }
 
     .logo {
@@ -155,276 +149,6 @@
         background-color: rgba(255, 255, 255, 0.1);
         border-radius: 10px;
         margin-bottom: 20px;
-    }
-
-    /* Mobile sidebar toggle button - Hidden on desktop */
-    .sidebar-toggle {
-        display: none !important;
-        position: fixed;
-        top: 12px;
-        left: 12px;
-        z-index: 9999;
-        background: #198754;
-        border: none;
-        color: white;
-        border-radius: 6px;
-        padding: 8px;
-        font-size: 1.1rem;
-        cursor: pointer;
-        touch-action: manipulation;
-        -webkit-tap-highlight-color: rgba(0,0,0,0);
-        box-shadow: 0 2px 8px rgba(0,0,0,0.15);
-        transition: all 0.3s ease;
-        width: 40px;
-        height: 40px;
-        align-items: center;
-        justify-content: center;
-        user-select: none;
-        /* Ensure button is always clickable */
-        pointer-events: auto !important;
-        -webkit-user-select: none;
-        -moz-user-select: none;
-        -ms-user-select: none;
-        /* Smooth visibility transitions */
-        opacity: 1;
-        visibility: visible;
-        transform: scale(1);
-    }
-
-    /* Explicitly hide on larger screens */
-    @media (min-width: 769px) {
-        .sidebar-toggle {
-            display: none !important;
-            visibility: hidden !important;
-            opacity: 0 !important;
-            pointer-events: none !important;
-        }
-    }
-
-    .sidebar-toggle:hover,
-    .sidebar-toggle:focus,
-    .sidebar-toggle:active {
-        background: #157347;
-        color: white;
-        outline: none;
-        box-shadow: 0 4px 12px rgba(0,0,0,0.2);
-        transform: translateY(-1px);
-    }
-
-    .sidebar-toggle:active {
-        transform: translateY(0);
-        box-shadow: 0 2px 6px rgba(0,0,0,0.2);
-    }
-
-    .sidebar-toggle i {
-        pointer-events: none;
-    }
-
-    /* Overlay for mobile sidebar */
-    .sidebar-overlay {
-        display: none;
-        position: fixed;
-        top: 0;
-        left: 0;
-        right: 0;
-        bottom: 0;
-        background: rgba(0, 0, 0, 0.5);
-        z-index: 1040;
-    }
-
-    /* Mobile Responsive Styles */
-    @media (max-width: 768px) {
-        .sidebar {
-            transform: translateX(-100%);
-            width: 280px;
-        }
-
-        .sidebar.show {
-            transform: translateX(0);
-        }
-
-        .sidebar-toggle {
-            display: flex !important;
-            visibility: visible !important;
-            opacity: 1 !important;
-            pointer-events: auto !important;
-        }
-
-        /* Hide the toggle button when sidebar is open */
-        .sidebar-toggle.hidden {
-            opacity: 0;
-            pointer-events: none;
-            transform: scale(0.8);
-            visibility: hidden;
-        }
-
-        .sidebar-overlay.show {
-            display: block;
-        }
-
-        .main-content {
-            margin-left: 0;
-            padding: 20px 15px;
-        }
-
-        .header {
-            left: 0;
-            padding: 8px 12px;
-            height: auto;
-            min-height: 60px;
-        }
-
-        .header .d-flex {
-            flex-direction: row !important;
-            align-items: center !important;
-            justify-content: space-between !important;
-            gap: 0.25rem;
-            flex-wrap: nowrap;
-        }
-
-        .header h4 {
-            display: none !important;
-        }
-
-        .header .d-flex.align-items-center {
-            flex-shrink: 0;
-            gap: 0.15rem;
-            margin-left: auto;
-        }
-
-        .header .dropdown-toggle {
-            padding: 0.2rem;
-            font-size: 0;
-            border: none;
-            background: transparent !important;
-        }
-
-        .header .dropdown-toggle span {
-            display: none !important;
-        }
-
-        .header .bg-success.rounded-circle {
-            width: 32px !important;
-            height: 32px !important;
-            flex-shrink: 0;
-            display: flex !important;
-            align-items: center !important;
-            justify-content: center !important;
-        }
-
-        .header .bg-success.rounded-circle i {
-            font-size: 0.9rem;
-        }
-
-        .content {
-            margin-top: 80px;
-            min-height: calc(100vh - 80px);
-        }
-
-        .logo {
-            width: 35px;
-            height: 35px;
-            flex-shrink: 0;
-        }
-
-        /* Profile dropdown adjustments */
-        .dropdown-menu {
-            min-width: 200px;
-            position: absolute !important;
-            right: 0 !important;
-            left: auto !important;
-        }
-        
-        /* Fix button interactions on mobile */
-        .btn,
-        .dropdown-toggle {
-            touch-action: manipulation;
-            -webkit-tap-highlight-color: rgba(0,0,0,0);
-        }
-        
-        /* Ensure proper touch targets */
-        .nav-link {
-            min-height: 48px;
-            display: flex;
-            align-items: center;
-        }
-    }
-
-    @media (max-width: 576px) {
-        .main-content {
-            padding: 15px 10px;
-        }
-
-        .header {
-            padding: 8px 12px;
-            min-height: 55px;
-        }
-
-        .header h4 {
-            display: none !important;
-        }
-
-        .header .dropdown-toggle {
-            padding: 0.2rem 0.4rem;
-            font-size: 0.8rem;
-        }
-
-        .header .dropdown-toggle span {
-            display: none;
-        }
-
-        .header .bg-success.rounded-circle {
-            width: 28px !important;
-            height: 28px !important;
-        }
-
-        .header .bg-success.rounded-circle i {
-            font-size: 0.8rem;
-        }
-
-        .logo {
-            width: 30px;
-            height: 30px;
-        }
-
-        .content {
-            margin-top: 75px;
-            min-height: calc(100vh - 75px);
-        }
-
-        .sidebar {
-            width: 260px;
-        }
-
-        .sidebar-title {
-            font-size: 1.1rem;
-        }
-
-        .sidebar-subtitle {
-            font-size: 0.8rem;
-        }
-
-        .sidebar .nav-link {
-            padding: 8px;
-            font-size: 0.9rem;
-        }
-
-        .icon-size {
-            width: 20px;
-            height: 20px;
-        }
-
-        .logo {
-            width: 35px;
-            height: 35px;
-        }
-    }
-
-    /* Ensure content is never hidden behind sidebar */
-    @media (min-width: 769px) {
-        .sidebar {
-            transform: translateX(0) !important;
-        }
     }
 
     /* Profile Dropdown Styles */
@@ -556,22 +280,29 @@
         }
     }
     </style>
+    <style>
+    /* Global DataTables search box style */
+.dataTables_filter label > input[type="search"] {
+    border-radius: 2rem !important;
+    border: 1px solid #ced4da;
+    padding: 0.5rem 1.5rem;
+    width: 400px !important;
+    max-width: 100%;
+    margin-left: 0 !important;
+    font-size: 1rem;
+    background: #fff;
+    box-shadow: 0 1px 4px rgba(0,0,0,0.04);
+    transition: border-color 0.2s;
+}
+    </style>
     <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 </head>
 
 <body>
-    <!-- Mobile Sidebar Toggle Button -->
-    <button class="sidebar-toggle" id="sidebarToggle" onclick="toggleMobileSidebar()">
-        <i class="bi bi-list"></i>
-    </button>
-
-    <!-- Mobile Sidebar Overlay -->
-    <div class="sidebar-overlay" id="sidebarOverlay" onclick="closeMobileSidebar()"></div>
-
     <div class="container-fluid">
         <div class="row">
             <!-- Sidebar -->
-            <div class="col-md-2 sidebar" id="sidebar">
+            <div class="col-md-2 sidebar">
                 <div class="d-flex flex-column align-items-center justify-content-center p-3">
                     <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSI Logo" class="logo mb-2">
                     <h3 class="sidebar-title mb-0">KPSI</h3>
@@ -722,71 +453,6 @@
     <script src="https://unpkg.com/@popperjs/core@2"></script>
     <script src="https://unpkg.com/tippy.js@6"></script>
     <script>
-    // Pure JavaScript fallback function for mobile sidebar toggle
-    function toggleMobileSidebar() {
-        console.log('toggleMobileSidebar called');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        const toggleBtn = document.getElementById('sidebarToggle');
-        
-        if (sidebar && overlay && toggleBtn) {
-            sidebar.classList.toggle('show');
-            overlay.classList.toggle('show');
-            
-            // Hide/show the toggle button with proper transitions
-            if (sidebar.classList.contains('show')) {
-                toggleBtn.classList.add('hidden');
-                console.log('Button hidden - sidebar is now open');
-            } else {
-                toggleBtn.classList.remove('hidden');
-                console.log('Button shown - sidebar is now closed');
-            }
-            
-            console.log('Sidebar toggled via fallback function');
-        } else {
-            console.error('Sidebar or overlay elements not found');
-        }
-    }
-
-    // Function to close mobile sidebar
-    function closeMobileSidebar() {
-        console.log('closeMobileSidebar called');
-        const sidebar = document.getElementById('sidebar');
-        const overlay = document.getElementById('sidebarOverlay');
-        const toggleBtn = document.getElementById('sidebarToggle');
-        
-        if (sidebar && overlay && toggleBtn) {
-            sidebar.classList.remove('show');
-            overlay.classList.remove('show');
-            toggleBtn.classList.remove('hidden');
-            console.log('Sidebar closed via fallback function - button restored');
-        }
-    }
-
-    // Additional initialization when DOM is fully loaded
-    document.addEventListener('DOMContentLoaded', function() {
-        console.log('DOM fully loaded');
-        
-        // Ensure mobile button is working on all devices
-        const toggleBtn = document.getElementById('sidebarToggle');
-        if (toggleBtn) {
-            console.log('Mobile toggle button found in DOM');
-            
-            // Add event listener using both approaches for maximum compatibility
-            toggleBtn.onclick = function(e) {
-                e.preventDefault();
-                toggleMobileSidebar();
-            };
-            
-            // Also add touch events for mobile
-            toggleBtn.addEventListener('touchend', function(e) {
-                e.preventDefault();
-                e.stopPropagation();
-                toggleMobileSidebar();
-            }, {passive: false});
-        }
-    });
-
     // Global SweetAlert2 configuration
     const Toast = Swal.mixin({
         toast: true,
@@ -807,152 +473,6 @@
             cancelButton: 'btn btn-secondary mx-2'
         },
         buttonsStyling: false
-    });
-
-    // Mobile Sidebar Toggle Functionality
-    $(document).ready(function() {
-        const sidebar = $('#sidebar');
-        const sidebarToggle = $('#sidebarToggle');
-        const sidebarOverlay = $('#sidebarOverlay');
-        let isTouch = false;
-
-        // Debug: Log when button is found
-        console.log('Sidebar toggle button found:', sidebarToggle.length > 0);
-        console.log('Window width:', $(window).width());
-
-        // Detect touch device
-        function isTouchDevice() {
-            return 'ontouchstart' in window || navigator.maxTouchPoints > 0 || navigator.msMaxTouchPoints > 0;
-        }
-
-        // Function to toggle sidebar
-        function toggleSidebar() {
-            console.log('Toggling sidebar via jQuery');
-            sidebar.toggleClass('show');
-            sidebarOverlay.toggleClass('show');
-            
-            // Hide/show the toggle button with proper logging
-            if (sidebar.hasClass('show')) {
-                sidebarToggle.addClass('hidden');
-                console.log('jQuery: Button hidden - sidebar is now open');
-            } else {
-                sidebarToggle.removeClass('hidden');
-                console.log('jQuery: Button shown - sidebar is now closed');
-            }
-        }
-
-        // Handle touch start
-        sidebarToggle.on('touchstart', function(e) {
-            console.log('Touch start detected');
-            isTouch = true;
-            e.preventDefault();
-        });
-
-        // Handle touch end
-        sidebarToggle.on('touchend', function(e) {
-            console.log('Touch end detected');
-            e.preventDefault();
-            e.stopPropagation();
-            if (isTouch) {
-                toggleSidebar();
-                isTouch = false;
-            }
-        });
-
-        // Handle click for non-touch devices
-        sidebarToggle.on('click', function(e) {
-            e.preventDefault();
-            e.stopPropagation();
-            console.log('Click detected, isTouch:', isTouch);
-            
-            // Only handle click if it's not a touch device or touch didn't fire
-            if (!isTouchDevice() || !isTouch) {
-                toggleSidebar();
-            }
-            isTouch = false;
-        });
-
-        // Close sidebar when clicking overlay
-        sidebarOverlay.on('click touchend', function(e) {
-            e.preventDefault();
-            console.log('Overlay clicked/touched - closing sidebar');
-            sidebar.removeClass('show');
-            sidebarOverlay.removeClass('show');
-            sidebarToggle.removeClass('hidden');
-            console.log('jQuery: Button restored after overlay click');
-        });
-
-        // Close sidebar when clicking outside on mobile
-        $(document).on('click touchstart', function(e) {
-            if ($(window).width() <= 768) {
-                if (!sidebar.is(e.target) && sidebar.has(e.target).length === 0 && 
-                    !sidebarToggle.is(e.target) && sidebarToggle.has(e.target).length === 0) {
-                    sidebar.removeClass('show');
-                    sidebarOverlay.removeClass('show');
-                    sidebarToggle.removeClass('hidden');
-                    console.log('jQuery: Button restored after outside click');
-                }
-            }
-        });
-
-        // Handle window resize
-        $(window).resize(function() {
-            if ($(window).width() > 768) {
-                sidebar.removeClass('show');
-                sidebarOverlay.removeClass('show');
-                sidebarToggle.removeClass('hidden');
-                console.log('jQuery: Button restored after window resize to desktop');
-            }
-        });
-
-        // Add touch-friendly classes for mobile devices
-        if (isTouchDevice()) {
-            $('body').addClass('touch-device');
-            console.log('Touch device detected');
-        }
-
-        // Add simple backup event handler for mobile devices
-        if (window.innerWidth <= 768) {
-            console.log('Mobile screen detected');
-            
-            // Add additional click handler for mobile using DOM
-            const toggleButton = document.getElementById('sidebarToggle');
-            const sidebar = document.getElementById('sidebar');
-            const overlay = document.getElementById('sidebarOverlay');
-            
-            if (toggleButton && sidebar && overlay) {
-                // Remove any existing event listeners to avoid conflicts
-                toggleButton.onclick = null;
-                
-                // Add clean event listener
-                toggleButton.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    e.stopPropagation();
-                    console.log('Direct DOM click handler triggered');
-                    sidebar.classList.toggle('show');
-                    overlay.classList.toggle('show');
-                    
-                    // Hide/show toggle button with logging
-                    if (sidebar.classList.contains('show')) {
-                        toggleButton.classList.add('hidden');
-                        console.log('DOM: Button hidden - sidebar opened');
-                    } else {
-                        toggleButton.classList.remove('hidden');
-                        console.log('DOM: Button shown - sidebar closed');
-                    }
-                }, {passive: false});
-                
-                // Also ensure overlay click works
-                overlay.addEventListener('click', function(e) {
-                    e.preventDefault();
-                    console.log('Direct DOM overlay click - closing sidebar');
-                    sidebar.classList.remove('show');
-                    overlay.classList.remove('show');
-                    toggleButton.classList.remove('hidden');
-                    console.log('DOM: Button restored after overlay click');
-                }, {passive: false});
-            }
-        }
     });
 
     </script>
