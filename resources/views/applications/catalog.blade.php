@@ -53,21 +53,21 @@
         <div>
             <h5 class="card-title p-2 bg-light">Perubahan Sistem Aplikasi</h5>
             <div class="table-responsive">
-                <table class="table table-bordered">
+                <table class="table table-bordered table-sm" style="min-width: 900px; font-size: 0.95rem;">
                     <thead>
                         <tr class="text-center">
-                            <th rowspan="2" style="vertical-align: middle;">No</th>
-                            <th rowspan="2" style="vertical-align: middle;">Perubahan</th>
-                            <th rowspan="2" style="vertical-align: middle;">Tingkat Kepentingan</th>
-                            <th colspan="4">Tanggal Pelaksanaan Perubahan</th>
-                            <th rowspan="2" style="vertical-align: middle;">Versi</th>
-                            <th rowspan="2" style="vertical-align: middle;">Target Tanggal Release</th>
+                            <th rowspan="2" style="vertical-align: middle; min-width: 40px;">No</th>
+                            <th rowspan="2" style="vertical-align: middle; min-width: 180px;">Perubahan</th>
+                            <th rowspan="2" style="vertical-align: middle; min-width: 120px;">Tingkat Kepentingan</th>
+                            <th colspan="4" style="min-width: 400px;">Tanggal Pelaksanaan Perubahan</th>
+                            <th rowspan="2" style="vertical-align: middle; min-width: 80px;">Versi</th>
+                            <th rowspan="2" style="vertical-align: middle; min-width: 140px;">Target Tanggal Release</th>
                         </tr>
                         <tr class="text-center">
-                            <th>Tgl Permintaan</th>
-                            <th>Tgl Persetujuan</th>
-                            <th>Tgl UAT</th>
-                            <th>Tgl Release</th>
+                            <th style="min-width: 120px;">Tgl Permintaan</th>
+                            <th style="min-width: 120px;">Tgl Persetujuan</th>
+                            <th style="min-width: 120px;">Tgl UAT</th>
+                            <th style="min-width: 120px;">Tgl Release</th>
                         </tr>
                     </thead>
                     <tbody>
@@ -76,12 +76,47 @@
                             <td class="text-center">{{ $index + 1 }}</td>
                             <td>{{ $change->perubahan }}</td>
                             <td>{{ $change->tingkat_kepentingan }}</td>
-                            <td>{{ $change->request_date }}</td>
-                            <td>{{ $change->approval_date }}</td>
-                            <td>{{ $change->uat_date }}</td>
-                            <td>{{ $change->release_date }}</td>
+                            <td>
+                                @if($change->request_date_note)
+                                    {!! nl2br(e($change->request_date_note)) !!}<br>
+                                @endif
+                                @if($change->request_date)
+                                    <span>Tanggal: {{ \Carbon\Carbon::parse($change->request_date)->format('d F Y') }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($change->approval_date_note)
+                                    {!! nl2br(e($change->approval_date_note)) !!}<br>
+                                @endif
+                                @if($change->approval_date)
+                                    <span>Tanggal: {{ \Carbon\Carbon::parse($change->approval_date)->format('d F Y') }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($change->uat_date_note)
+                                    {!! nl2br(e($change->uat_date_note)) !!}<br>
+                                @endif
+                                @if($change->uat_date)
+                                    <span>Tanggal: {{ \Carbon\Carbon::parse($change->uat_date)->format('d F Y') }}</span>
+                                @endif
+                            </td>
+                            <td>
+                                @if($change->release_date_note)
+                                    {!! nl2br(e($change->release_date_note)) !!}<br>
+                                @endif
+                                @if($change->release_date)
+                                    <span>Tanggal: {{ \Carbon\Carbon::parse($change->release_date)->format('d F Y') }}</span>
+                                @endif
+                            </td>
                             <td>{{ $change->version }}</td>
-                            <td>{{ $change->target_release_date }}</td>
+                            <td>
+                                @if($change->target_release_date_note)
+                                    {!! nl2br(e($change->target_release_date_note)) !!}<br>
+                                @endif
+                                @if($change->target_release_date)
+                                    <span>Tanggal: {{ \Carbon\Carbon::parse($change->target_release_date)->format('d F Y') }}</span>
+                                @endif
+                            </td>
                         </tr>
                         @empty
                         <tr>

@@ -44,6 +44,7 @@
                             <div class="col-md-6">
                                 <label for="request_date" class="form-label">Tanggal Permintaan:</label>
                                 <input type="date" class="form-control" name="request_date" required>
+                                <textarea class="form-control mt-1" name="request_date_note" placeholder="Catatan Tanggal Permintaan" rows="2"></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="version" class="form-label">Versi:</label>
@@ -55,10 +56,12 @@
                             <div class="col-md-6">
                                 <label for="approval_date" class="form-label">Tanggal Persetujuan:</label>
                                 <input type="date" class="form-control" name="approval_date">
+                                <textarea class="form-control mt-1" name="approval_date_note" placeholder="Catatan Tanggal Persetujuan" rows="2"></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="uat_date" class="form-label">Tanggal UAT:</label>
                                 <input type="date" class="form-control" name="uat_date">
+                                <textarea class="form-control mt-1" name="uat_date_note" placeholder="Catatan Tanggal UAT" rows="2"></textarea>
                             </div>
                         </div>
 
@@ -66,10 +69,12 @@
                             <div class="col-md-6">
                                 <label for="release_date" class="form-label">Tanggal Rilis:</label>
                                 <input type="date" class="form-control" name="release_date">
+                                <textarea class="form-control mt-1" name="release_date_note" placeholder="Catatan Tanggal Rilis" rows="2"></textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="target_release_date" class="form-label">Tanggal Rilis Target:</label>
                                 <input type="date" class="form-control" name="target_release_date">
+                                <textarea class="form-control mt-1" name="target_release_date_note" placeholder="Catatan Tanggal Rilis Target" rows="2"></textarea>
                             </div>
                         </div>
 

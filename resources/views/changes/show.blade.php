@@ -46,6 +46,7 @@
                         <div class="col-md-6">
                             <label for="request_date" class="form-label">Tanggal Permintaan:</label>
                             <input type="date" class="form-control" value="{{ $change->request_date }}" readonly>
+                            <textarea class="form-control mt-1" rows="2" readonly>{{ $change->request_date_note }}</textarea>
                         </div>
                         <div class="col-md-6">
                             <label for="version" class="form-label">Versi:</label>
@@ -57,10 +58,12 @@
                         <div class="col-md-6">
                             <label for="approval_date" class="form-label">Tanggal Persetujuan:</label>
                             <input type="date" class="form-control" value="{{ $change->approval_date }}" readonly>
+                            <textarea class="form-control mt-1" rows="2" readonly>{{ $change->approval_date_note }}</textarea>
                         </div>
                         <div class="col-md-6">
                             <label for="uat_date" class="form-label">Tanggal UAT:</label>
                             <input type="date" class="form-control" value="{{ $change->uat_date }}" readonly>
+                            <textarea class="form-control mt-1" rows="2" readonly>{{ $change->uat_date_note }}</textarea>
                         </div>
                     </div>
 
@@ -68,10 +71,12 @@
                         <div class="col-md-6">
                             <label for="release_date" class="form-label">Tanggal Rilis:</label>
                             <input type="date" class="form-control" value="{{ $change->release_date }}" readonly>
+                            <textarea class="form-control mt-1" rows="2" readonly>{{ $change->release_date_note }}</textarea>
                         </div>
                         <div class="col-md-6">
                             <label for="target_release_date" class="form-label">Tanggal Rilis Target:</label>
                             <input type="date" class="form-control" value="{{ $change->target_release_date }}" readonly>
+                            <textarea class="form-control mt-1" rows="2" readonly>{{ $change->target_release_date_note }}</textarea>
                         </div>
                     </div>
 

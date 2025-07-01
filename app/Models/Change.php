@@ -11,9 +11,21 @@ class Change extends Model
 
     // Mendefinisikan atribut yang dapat diisi secara massal
     protected $fillable = [
-        'application_id', 'perubahan', 'tingkat_kepentingan', 
-        'request_date', 'approval_date', 'uat_date', 'release_date', 
-        'version', 'target_release_date', 'approval_status'
+        'application_id', 
+        'perubahan', 
+        'tingkat_kepentingan', 
+        'request_date',
+        'request_date_note',
+        'approval_date', 
+        'approval_date_note',
+        'uat_date', 
+        'uat_date_note',
+        'release_date', 
+        'release_date_note',
+        'version', 
+        'target_release_date', 
+        'target_release_date_note',
+        'approval_status'
     ];
 
     // Mendefinisikan relasi Many-to-One ke model Application
