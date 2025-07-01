@@ -50,6 +50,8 @@
                                 <label for="request_date" class="form-label">Tanggal Permintaan:</label>
                                 <input type="date" class="form-control" name="request_date"
                                     value="{{ $change->request_date }}" required>
+                                <textarea class="form-control mt-1" name="request_date_note"
+                                    placeholder="Catatan Tanggal Permintaan" rows="2">{{ $change->request_date_note }}</textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="version" class="form-label">Versi:</label>
@@ -62,10 +64,14 @@
                                 <label for="approval_date" class="form-label">Tanggal Persetujuan:</label>
                                 <input type="date" class="form-control" name="approval_date"
                                     value="{{ $change->approval_date }}">
+                                <textarea class="form-control mt-1" name="approval_date_note"
+                                    placeholder="Catatan Tanggal Persetujuan" rows="2">{{ $change->approval_date_note }}</textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="uat_date" class="form-label">Tanggal UAT:</label>
                                 <input type="date" class="form-control" name="uat_date" value="{{ $change->uat_date }}">
+                                <textarea class="form-control mt-1" name="uat_date_note"
+                                    placeholder="Catatan Tanggal UAT" rows="2">{{ $change->uat_date_note }}</textarea>
                             </div>
                         </div>
 
@@ -74,11 +80,15 @@
                                 <label for="release_date" class="form-label">Tanggal Rilis:</label>
                                 <input type="date" class="form-control" name="release_date"
                                     value="{{ $change->release_date }}">
+                                <textarea class="form-control mt-1" name="release_date_note"
+                                    placeholder="Catatan Tanggal Rilis" rows="2">{{ $change->release_date_note }}</textarea>
                             </div>
                             <div class="col-md-6">
                                 <label for="target_release_date" class="form-label">Tanggal Rilis Target:</label>
                                 <input type="date" class="form-control" name="target_release_date"
                                     value="{{ $change->target_release_date }}">
+                                <textarea class="form-control mt-1" name="target_release_date_note"
+                                    placeholder="Catatan Tanggal Rilis Target" rows="2">{{ $change->target_release_date_note }}</textarea>
                             </div>
                         </div>
 

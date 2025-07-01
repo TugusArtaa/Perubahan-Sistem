@@ -140,6 +140,7 @@ class ChangeController extends Controller
             'tingkat_kepentingan' => 'required',
             'request_date' => 'required|date',
             'version' => 'required',
+            // Note fields are optional, so no validation needed
         ]);
 
         // Simpan data perubahan ke database
@@ -148,11 +149,16 @@ class ChangeController extends Controller
             'perubahan' => $request->perubahan,
             'tingkat_kepentingan' => $request->tingkat_kepentingan,
             'request_date' => $request->request_date,
+            'request_date_note' => $request->request_date_note,
             'approval_date' => $request->approval_date,
+            'approval_date_note' => $request->approval_date_note,
             'uat_date' => $request->uat_date,
+            'uat_date_note' => $request->uat_date_note,
             'release_date' => $request->release_date,
+            'release_date_note' => $request->release_date_note,
             'version' => $request->version,
             'target_release_date' => $request->target_release_date,
+            'target_release_date_note' => $request->target_release_date_note,
         ]);
 
         // Redirect ke halaman index
@@ -177,6 +183,7 @@ class ChangeController extends Controller
             'tingkat_kepentingan' => 'required',
             'request_date' => 'required|date',
             'version' => 'required',
+            // Note fields are optional, so no validation needed
         ]);
 
         // Mengambil data perubahan berdasarkan id
