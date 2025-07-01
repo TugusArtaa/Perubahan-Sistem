@@ -65,8 +65,7 @@
     <table class="header-table">
         <tr>
             <td class="header-logo" rowspan="4">
-                {{-- Ganti path logo sesuai kebutuhan --}}
-                <img src="{{ public_path('logo-bpd-bali.png') }}" alt="Logo BPD Bali" style="width:60px; height:auto;">
+                <img src="{{ public_path('img/BPDLogo.png') }}" alt="Logo BPD Bali" style="width:60px; height:auto;">
             </td>
             <td class="header-title" rowspan="2" colspan="3">
                 STANDAR OPERASIONAL PROSEDUR<br>
@@ -121,19 +120,22 @@
     </table>
 
     <h2>Perubahan Sistem Aplikasi</h2>
-    <div class="table-responsive">
-        <table>
+    <div class="table-responsive" style="width:100%;overflow-x:auto;">
+        <table style="width:100%; font-size: 11px; table-layout: auto; word-break: break-word;">
             <thead>
                 <tr class="text-center">
-                    <th>No</th>
-                    <th>Perubahan</th>
-                    <th>Tingkat Kepentingan</th>
-                    <th>Tgl Permintaan</th>
-                    <th>Tgl Persetujuan</th>
-                    <th>Tgl UAT</th>
-                    <th>Tgl Release</th>
-                    <th>Versi</th>
-                    <th>Target Tanggal Release</th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">No</th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">Perubahan</th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">Tingkat Kepentingan</th>
+                    <th colspan="4" style="vertical-align: middle; white-space: nowrap;">Tanggal Pelaksanaan Perubahan</th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">Versi</th>
+                    <th rowspan="2" style="vertical-align: middle;">Target<br>Tanggal Release</th>
+                </tr>
+                <tr class="text-center">
+                    <th>Tgl<br>Permintaan</th>
+                    <th>Tgl<br>Persetujuan</th>
+                    <th>Tgl<br>UAT</th>
+                    <th>Tgl<br>Release</th>
                 </tr>
             </thead>
             <tbody>
@@ -192,6 +194,20 @@
             </tbody>
         </table>
     </div>
+    <style>
+        @media print {
+            table {
+                table-layout: auto !important;
+                font-size: 10px !important;
+            }
+            th, td {
+                padding: 4px !important;
+            }
+        }
+        th[style*="white-space: nowrap;"] {
+            white-space: nowrap !important;
+        }
+    </style>
 </body>
 
 </html>
