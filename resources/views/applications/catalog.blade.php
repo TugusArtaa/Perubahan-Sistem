@@ -27,6 +27,11 @@
                         <td>{{ $application->nama }}</td>
                     </tr>
                     <tr>
+                        <td>No Kepdir</td>
+                        <td>:</td>
+                        <td>{{ $application->no_kepdir }}</td>
+                    </tr>
+                    <tr>
                         <td>Fungsi</td>
                         <td>:</td>
                         <td>{{ $application->fungsi }}</td>
