@@ -10,7 +10,7 @@ class Application extends Model
     use HasFactory;
 
     // Mendefinisikan atribut yang dapat diisi secara massal
-    protected $fillable = ['nama', 'fungsi', 'pengguna', 'pemilik', 'pengembang'];
+    protected $fillable = ['nama', 'fungsi', 'pengguna', 'pemilik', 'pengembang', 'no_kepdir'];
 
     // Mendefinisikan relasi One-to-Many ke model Change
     public function changes()

@@ -29,6 +29,16 @@
                                 </div>
 
                                 <div class="mb-3">
+                                    <label for="no_kepdir" class="form-label">No Kepdir</label>
+                                    <input type="text" class="form-control @error('no_kepdir') is-invalid @enderror"
+                                        id="no_kepdir" name="no_kepdir" value="{{ old('no_kepdir', $application->no_kepdir) }}"
+                                        placeholder="Masukkan nomor Kepdir">
+                                    @error('no_kepdir')
+                                    <div class="invalid-feedback">{{ $message }}</div>
+                                    @enderror
+                                </div>
+
+                                <div class="mb-3">
                                     <label for="fungsi" class="form-label">Fungsi</label>
                                     <textarea class="form-control @error('fungsi') is-invalid @enderror" id="fungsi"
                                         name="fungsi" rows="3"

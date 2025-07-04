@@ -19,10 +19,13 @@ class ApplicationController extends Controller
     public function getApplicationsData(Request $request)
     {
         if ($request->ajax()) {
-            $data = Application::select(['id', 'nama', 'fungsi', 'pengguna', 'pemilik', 'pengembang']);
+            $data = Application::select(['id', 'nama', 'fungsi', 'pengguna', 'pemilik', 'pengembang', 'no_kepdir']);
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('no_kepdir', function($row) {
+                    return $row->no_kepdir;
+                })
                 ->addColumn('action', function($row) {
                     $actions = '<div class="text-center">
                         <div class="d-flex flex-wrap justify-content-center gap-1" style="max-width: 100px;">';
@@ -81,6 +84,7 @@ class ApplicationController extends Controller
             'pengguna' => 'required',
             'pemilik' => 'required',
             'pengembang' => 'required',
+            'no_kepdir' => 'required',
         ]);
     
         // Simpan data ke database
@@ -109,6 +113,7 @@ class ApplicationController extends Controller
             'pengguna' => 'required',
             'pemilik' => 'required',
             'pengembang' => 'required',
+            'no_kepdir' => 'required',
         ]);
 
         // Mengambil data aplikasi berdasarkan id

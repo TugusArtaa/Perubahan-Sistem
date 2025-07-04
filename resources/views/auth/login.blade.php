@@ -6,8 +6,8 @@
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
     <title>Login - KPSI</title>
-
     <!-- Bootstrap CSS -->
+    <link rel="icon" type="image/x-icon" href="{{ asset('img/BPDLogo.png') }}">
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
     <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.11.1/font/bootstrap-icons.css">
 

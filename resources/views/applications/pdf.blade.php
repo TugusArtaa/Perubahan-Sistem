@@ -75,13 +75,13 @@
             <td class="header-meta">Halaman : 1</td>
         </tr>
         <tr>
-            <td class="header-meta">Kep. Dir : 0554/KEP/DIR/TI/2019</td>
+            <td class="header-meta">Kep. Dir : {{ $application->no_kepdir }}</td>
         </tr>
         <tr>
             <td class="header-title" colspan="3" rowspan="2" style="font-size:15px;">
                 Katalog Perubahan Sistem Aplikasi
             </td>
-            <td class="header-meta">Tanggal : 17 – 09 – 2019</td>
+            <td class="header-meta">Tanggal : {{ \Carbon\Carbon::now()->format('d - m - Y') }}</td>
         </tr>
         <tr>
             <td class="header-meta">Tanggal Revisi :</td>
@@ -95,6 +95,11 @@
                 <td style="width: 15%;">Nama</td>
                 <td style="width: 2%;">:</td>
                 <td>{{ $application->nama }}</td>
+            </tr>
+            <tr>
+                <td>No Kepdir</td>
+                <td>:</td>
+                <td>{{ $application->no_kepdir }}</td>
             </tr>
             <tr>
                 <td>Fungsi</td>

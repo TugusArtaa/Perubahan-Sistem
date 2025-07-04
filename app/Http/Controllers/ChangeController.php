@@ -162,7 +162,7 @@ class ChangeController extends Controller
         ]);
 
         // Redirect ke halaman index
-        return redirect()->route('changes.index');
+        return redirect()->route('applications.index');
     }
 
     // Menampilkan form untuk mengedit perubahan yang sudah ada
