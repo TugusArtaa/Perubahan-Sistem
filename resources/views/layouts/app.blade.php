@@ -307,7 +307,7 @@
                 <div class="d-flex flex-column align-items-center justify-content-center p-3">
                     <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSI Logo" class="logo mb-2">
                     <h3 class="sidebar-title mb-0">KPSI</h3>
-                    <p class="sidebar-subtitle mb-0">Katalog Perubahan Sistem Informasi</p>
+                    <p class="sidebar-subtitle mb-0">Katalog Perubahan Sistem Aplikasi</p>
                 </div>
                 <hr class="w-100 my-3" style="border-color: rgba(255, 255, 255, 0.3);">
                 <ul class="nav flex-column mt-4 w-100">

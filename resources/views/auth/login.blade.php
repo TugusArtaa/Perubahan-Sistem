@@ -155,14 +155,14 @@
                     <h2 class="mb-3">Welcome Back!</h2>
                     <h4 class="mb-4">KPSI</h4>
                     <p class="mb-4">Katalog Perubahan Sistem Informasi</p>
-                    <p class="opacity-75">Manage your application changes efficiently and securely</p>
+                    <p class="opacity-75">Kelola perubahan aplikasi secara efisien dan efektif.</p>
                 </div>
 
                 <!-- Right Side - Login Form -->
                 <div class="col-md-6 login-right">
                     <div class="mb-4">
-                        <h3 class="text-dark mb-2">Sign In</h3>
-                        <p class="text-muted">Enter your credentials to access your account</p>
+                        <h3 class="text-dark mb-2">Masuk</h3>
+                        <p class="text-muted">Masukkan kredensial Anda untuk mengakses akun Anda</p>
                     </div>
 
                     <!-- Session Status -->
@@ -179,7 +179,7 @@
                         <!-- Email Address -->
                         <div class="mb-3">
                             <label for="email" class="form-label">
-                                <i class="bi bi-envelope me-2"></i>Email Address
+                                <i class="bi bi-envelope me-2"></i>Email
                             </label>
                             <input type="email" 
                                    class="form-control @error('email') is-invalid @enderror" 
@@ -189,7 +189,7 @@
                                    required 
                                    autofocus 
                                    autocomplete="username"
-                                   placeholder="Enter your email address">
+                                   placeholder="Masukkan email Anda">
                             @error('email')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
@@ -206,7 +206,7 @@
                                    name="password" 
                                    required 
                                    autocomplete="current-password"
-                                   placeholder="Enter your password">
+                                   placeholder="Masukkan password Anda">
                             @error('password')
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
