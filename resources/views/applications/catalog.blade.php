@@ -78,10 +78,10 @@
                     <tbody>
                         @forelse ($changes as $index => $change)
                         <tr>
-                            <td class="text-center">{{ $index + 1 }}</td>
-                            <td>{{ $change->perubahan }}</td>
-                            <td>{{ $change->tingkat_kepentingan }}</td>
-                            <td>
+                            <td class="text-center text-wrap" style="word-break: break-word;">{{ $index + 1 }}</td>
+                            <td class="text-wrap" style="word-break: break-word;">{{ $change->perubahan }}</td>
+                            <td class="text-wrap" style="word-break: break-word;">{{ $change->tingkat_kepentingan }}</td>
+                            <td class="text-wrap" style="word-break: break-word;">
                                 @if($change->request_date_note)
                                     {!! nl2br(e($change->request_date_note)) !!}<br>
                                 @endif
@@ -89,7 +89,7 @@
                                     <span>Tanggal: {{ \Carbon\Carbon::parse($change->request_date)->format('d F Y') }}</span>
                                 @endif
                             </td>
-                            <td>
+                            <td class="text-wrap" style="word-break: break-word;">
                                 @if($change->approval_date_note)
                                     {!! nl2br(e($change->approval_date_note)) !!}<br>
                                 @endif
@@ -97,7 +97,7 @@
                                     <span>Tanggal: {{ \Carbon\Carbon::parse($change->approval_date)->format('d F Y') }}</span>
                                 @endif
                             </td>
-                            <td>
+                            <td class="text-wrap" style="word-break: break-word;">
                                 @if($change->uat_date_note)
                                     {!! nl2br(e($change->uat_date_note)) !!}<br>
                                 @endif
@@ -105,7 +105,7 @@
                                     <span>Tanggal: {{ \Carbon\Carbon::parse($change->uat_date)->format('d F Y') }}</span>
                                 @endif
                             </td>
-                            <td>
+                            <td class="text-wrap" style="word-break: break-word;">
                                 @if($change->release_date_note)
                                     {!! nl2br(e($change->release_date_note)) !!}<br>
                                 @endif
@@ -113,8 +113,8 @@
                                     <span>Tanggal: {{ \Carbon\Carbon::parse($change->release_date)->format('d F Y') }}</span>
                                 @endif
                             </td>
-                            <td>{{ $change->version }}</td>
-                            <td>
+                            <td class="text-wrap" style="word-break: break-word;">{{ $change->version }}</td>
+                            <td class="text-wrap" style="word-break: break-word;">
                                 @if($change->target_release_date_note)
                                     {!! nl2br(e($change->target_release_date_note)) !!}<br>
                                 @endif
@@ -125,7 +125,7 @@
                         </tr>
                         @empty
                         <tr>
-                            <td colspan="9" class="text-center">Tidak ada data perubahan</td>
+                            <td colspan="9" class="text-center text-wrap" style="word-break: break-word;">Tidak ada data perubahan</td>
                         </tr>
                         @endforelse
                     </tbody>

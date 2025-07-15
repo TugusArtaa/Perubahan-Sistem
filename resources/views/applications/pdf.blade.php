@@ -58,6 +58,12 @@
         font-size: 12px;
         width: 180px;
     }
+
+    .text-wrap {
+        word-break: break-word;
+        overflow-wrap: break-word;
+        white-space: pre-line;
+    }
     </style>
 </head>
 
@@ -126,30 +132,35 @@
 
     <h2>Perubahan Sistem Aplikasi</h2>
     <div class="table-responsive" style="width:100%;overflow-x:auto;">
-        <table style="width:100%; font-size: 11px; table-layout: auto; word-break: break-word;">
+        <table style="width:100%; font-size: 11px;">
             <thead>
                 <tr class="text-center">
-                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">No</th>
-                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">Perubahan</th>
-                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">Tingkat Kepentingan</th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap; max-width: 55px; width: 55px;">No</th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap; max-width: 55px; width: 55px;">Perubahan
+                    </th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap; max-width: 55px; width: 55px;">
+                        Tingkat<br>Kepentingan
+                    </th>
                     <th colspan="4" style="vertical-align: middle; white-space: nowrap;">Tanggal Pelaksanaan Perubahan</th>
-                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap;">Versi</th>
-                    <th rowspan="2" style="vertical-align: middle;">Target<br>Tanggal Release</th>
+                    <th rowspan="2" style="vertical-align: middle; white-space: nowrap; max-width: 55px; width: 55px;">Versi
+                    </th>
+                    <th rowspan="2" style="vertical-align: middle; max-width: 55px; width: 55px;">Target<br>Tanggal Release
+                    </th>
                 </tr>
                 <tr class="text-center">
-                    <th>Tgl<br>Permintaan</th>
-                    <th>Tgl<br>Persetujuan</th>
-                    <th>Tgl<br>UAT</th>
-                    <th>Tgl<br>Release</th>
+                    <th style="max-width: 55px; width: 55px;">Tgl<br>Permintaan</th>
+                    <th style="max-width: 55px; width: 55px;">Tgl<br>Persetujuan</th>
+                    <th style="max-width: 55px; width: 55px;">Tgl<br>UAT</th>
+                    <th style="max-width: 55px; width: 55px;">Tgl<br>Release</th>
                 </tr>
             </thead>
             <tbody>
                 @forelse ($changes as $index => $change)
                 <tr>
-                    <td class="text-center">{{ $index + 1 }}</td>
-                    <td>{{ $change->perubahan }}</td>
-                    <td>{{ $change->tingkat_kepentingan }}</td>
-                    <td>
+                    <td class="text-center text-wrap" style="max-width: 55px; width: 55px;">{{ $index + 1 }}</td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">{{ $change->perubahan }}</td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">{{ $change->tingkat_kepentingan }}</td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">
                         @if($change->request_date_note)
                             {!! nl2br(e($change->request_date_note)) !!}<br>
                         @endif
@@ -157,7 +168,7 @@
                             <span>Tanggal: {{ \Carbon\Carbon::parse($change->request_date)->format('d F Y') }}</span>
                         @endif
                     </td>
-                    <td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">
                         @if($change->approval_date_note)
                             {!! nl2br(e($change->approval_date_note)) !!}<br>
                         @endif
@@ -165,7 +176,7 @@
                             <span>Tanggal: {{ \Carbon\Carbon::parse($change->approval_date)->format('d F Y') }}</span>
                         @endif
                     </td>
-                    <td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">
                         @if($change->uat_date_note)
                             {!! nl2br(e($change->uat_date_note)) !!}<br>
                         @endif
@@ -173,7 +184,7 @@
                             <span>Tanggal: {{ \Carbon\Carbon::parse($change->uat_date)->format('d F Y') }}</span>
                         @endif
                     </td>
-                    <td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">
                         @if($change->release_date_note)
                             {!! nl2br(e($change->release_date_note)) !!}<br>
                         @endif
@@ -181,8 +192,8 @@
                             <span>Tanggal: {{ \Carbon\Carbon::parse($change->release_date)->format('d F Y') }}</span>
                         @endif
                     </td>
-                    <td>{{ $change->version }}</td>
-                    <td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">{{ $change->version }}</td>
+                    <td class="text-wrap" style="max-width: 55px; width: 55px;">
                         @if($change->target_release_date_note)
                             {!! nl2br(e($change->target_release_date_note)) !!}<br>
                         @endif
@@ -193,7 +204,7 @@
                 </tr>
                 @empty
                 <tr>
-                    <td colspan="9" class="text-center">Tidak ada data perubahan</td>
+                    <td colspan="9" class="text-center text-wrap">Tidak ada data perubahan</td>
                 </tr>
                 @endforelse
             </tbody>
@@ -207,6 +218,13 @@
             }
             th, td {
                 padding: 4px !important;
+            }
+            thead { 
+                display: table-header-group;
+                page-break-inside: avoid;
+            }
+            tbody {
+                page-break-inside: auto;
             }
         }
         th[style*="white-space: nowrap;"] {
