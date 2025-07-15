@@ -64,6 +64,10 @@
         overflow-wrap: break-word;
         white-space: pre-line;
     }
+
+    @page {
+        size: landscape;
+    }
     </style>
 </head>
 
