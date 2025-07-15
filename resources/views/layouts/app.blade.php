@@ -305,8 +305,8 @@
             <!-- Sidebar -->
             <div class="col-md-2 sidebar">
                 <div class="d-flex flex-column align-items-center justify-content-center p-3">
-                    <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSI Logo" class="logo mb-2">
-                    <h3 class="sidebar-title mb-0">KPSI</h3>
+                    <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSA Logo" class="logo mb-2">
+                    <h3 class="sidebar-title mb-0">KPSA</h3>
                     <p class="sidebar-subtitle mb-0">Katalog Perubahan Sistem Aplikasi</p>
                 </div>
                 <hr class="w-100 my-3" style="border-color: rgba(255, 255, 255, 0.3);">
