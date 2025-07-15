@@ -5,7 +5,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1">
     <meta name="csrf-token" content="{{ csrf_token() }}">
 
-    <title>Register - KPSI</title>
+    <title>Register - KPSA</title>
 
     <!-- Bootstrap CSS -->
     <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/css/bootstrap.min.css" rel="stylesheet">
@@ -130,9 +130,9 @@
                         <div class="row g-0">
                             <!-- Left Side - Branding -->
                             <div class="col-md-6 register-left">
-                                <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSI Logo" class="logo">
+                                <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSA Logo" class="logo">
                                 <h2 class="mb-3">Join Us Today!</h2>
-                                <h4 class="mb-4">KPSI</h4>
+                                <h4 class="mb-4">KPSA</h4>
                                 <p class="mb-4">Katalog Perubahan Sistem Informasi</p>
                                 <p class="opacity-75">Create your account to start managing application changes efficiently</p>
                             </div>
