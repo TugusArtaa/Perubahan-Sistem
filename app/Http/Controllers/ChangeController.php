@@ -140,11 +140,11 @@ class ChangeController extends Controller
             'tingkat_kepentingan' => 'required',
             'request_date' => 'required|date',
             'version' => 'required',
-            'request_date_note' => 'nullable|max:50',
-            'approval_date_note' => 'nullable|max:50',
-            'uat_date_note' => 'nullable|max:50',
-            'release_date_note' => 'nullable|max:50',
-            'target_release_date_note' => 'nullable|max:50',
+            'request_date_note' => 'nullable',
+            'approval_date_note' => 'nullable',
+            'uat_date_note' => 'nullable',
+            'release_date_note' => 'nullable',
+            'target_release_date_note' => 'nullable',
             // Note fields are optional, so no validation needed
         ]);
 

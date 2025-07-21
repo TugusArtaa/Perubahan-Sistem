@@ -154,7 +154,7 @@
                     <img src="{{ asset('img/BPDLogo.png') }}" alt="KPSA Logo" class="logo">
                     <h2 class="mb-3">Welcome Back!</h2>
                     <h4 class="mb-4">KPSA</h4>
-                    <p class="mb-4">Katalog Perubahan Sistem Informasi</p>
+                    <p class="mb-4">Katalog Perubahan Sistem Aplikasi</p>
                     <p class="opacity-75">Kelola perubahan aplikasi secara efisien dan efektif.</p>
                 </div>
 
