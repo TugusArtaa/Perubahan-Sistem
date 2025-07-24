@@ -10,6 +10,21 @@
         <h2 class="text-success">Daftar Perubahan</h2>
     </div>
 
+    <div class="d-flex justify-content-start" style="margin-left:85%; margin-bottom: 0.5rem;">
+        {{-- @can('create-changes')
+        <a href="{{ route('changes.create') }}" class="btn btn-success me-2">
+            <i class="bi bi-plus-circle me-1"></i>
+            Tambah Perubahan
+        </a>
+        @endcan --}}
+        @can('delete-changes')
+        <button id="bulkDeleteChangesBtn" class="btn btn-danger d-none">
+            <i class="bi bi-trash me-1"></i>
+            Hapus Terpilih
+        </button>
+        @endcan
+    </div>
+
     <div class="card border-0 shadow-sm">
         <div class="card-body p-0">
             <!-- DataTables wrapper for horizontal scroll -->
@@ -17,6 +32,9 @@
                 <table id="changesTable" class="table table-hover table-striped mb-0 w-100">
                     <thead class="table-light">
                         <tr>
+                            <th class="text-center" style="min-width: 40px;">
+                                <input type="checkbox" id="selectAllChanges">
+                            </th>
                             <th class="text-center" style="min-width: 50px;">No</th>
                             <th style="min-width: 120px;">Aplikasi</th>
                             <th style="min-width: 200px;">Perubahan</th>
@@ -222,6 +240,14 @@ $(document).ready(function() {
         },
         columns: [
             {
+                data: 'checkbox',
+                name: 'checkbox',
+                orderable: false,
+                searchable: false,
+                className: 'text-center',
+                width: '40px'
+            },
+            {
                 data: 'DT_RowIndex',
                 name: 'DT_RowIndex',
                 orderable: false,
@@ -351,8 +377,106 @@ $(document).ready(function() {
                 $('[data-bs-toggle="tooltip"]').tooltip();
                 // Set placeholder for search input
                 $(this.api().table().container()).find('input[type="search"]').attr('placeholder', 'Pencarian');
+                $('#selectAllChanges').prop('checked', false);
+                toggleBulkDeleteChangesBtn();
             }
     });
+
+    // Handle select all
+    $('#selectAllChanges').on('click', function() {
+        var checked = $(this).is(':checked');
+        $('.row-checkbox-changes').prop('checked', checked);
+        toggleBulkDeleteChangesBtn();
+    });
+
+    // Handle row checkbox click
+    $(document).on('change', '.row-checkbox-changes', function() {
+        var allChecked = $('.row-checkbox-changes').length === $('.row-checkbox-changes:checked').length;
+        $('#selectAllChanges').prop('checked', allChecked);
+        toggleBulkDeleteChangesBtn();
+    });
+
+    // Toggle bulk delete button
+    function toggleBulkDeleteChangesBtn() {
+        var selected = $('.row-checkbox-changes:checked').length;
+        if (selected > 0) {
+            $('#bulkDeleteChangesBtn').removeClass('d-none');
+        } else {
+            $('#bulkDeleteChangesBtn').addClass('d-none');
+        }
+    }
+
+    // Bulk delete button click
+    $('#bulkDeleteChangesBtn').on('click', function() {
+        var ids = $('.row-checkbox-changes:checked').map(function() {
+            return $(this).val();
+        }).get();
+
+        if (ids.length === 0) return;
+
+        Swal.fire({
+            title: 'Konfirmasi Hapus',
+            text: 'Apakah Anda yakin ingin menghapus ' + ids.length + ' perubahan terpilih?',
+            icon: 'warning',
+            showCancelButton: true,
+            confirmButtonColor: '#dc3545',
+            cancelButtonColor: '#6c757d',
+            confirmButtonText: 'Ya, Hapus!',
+            cancelButtonText: 'Batal',
+            reverseButtons: true
+        }).then((result) => {
+            if (result.isConfirmed) {
+                Swal.fire({
+                    title: 'Menghapus...',
+                    text: 'Sedang memproses permintaan Anda',
+                    icon: 'info',
+                    allowOutsideClick: false,
+                    showConfirmButton: false,
+                    didOpen: () => {
+                        Swal.showLoading();
+                    }
+                });
+
+                $.ajax({
+                    url: '{{ route("changes.bulkDelete") }}',
+                    type: 'POST',
+                    data: { ids: ids },
+                    headers: {
+                        'X-CSRF-TOKEN': $('meta[name="csrf-token"]').attr('content')
+                    },
+                    success: function(response) {
+                        if (response.success) {
+                            Swal.fire({
+                                title: 'Berhasil!',
+                                text: response.message,
+                                icon: 'success',
+                                timer: 2000,
+                                showConfirmButton: false
+                            });
+                            $('#changesTable').DataTable().ajax.reload();
+                        } else {
+                            Swal.fire({
+                                title: 'Gagal!',
+                                text: response.message,
+                                icon: 'error',
+                                confirmButtonText: 'OK'
+                            });
+                        }
+                    },
+                    error: function(xhr) {
+                        const errorMessage = xhr.responseJSON?.message || 'Terjadi kesalahan saat menghapus perubahan';
+                        Swal.fire({
+                            title: 'Gagal!',
+                            text: errorMessage,
+                            icon: 'error',
+                            confirmButtonText: 'OK'
+                        });
+                    }
+                });
+            }
+        });
+    });
+
 });
 
 // Delete function for changes
