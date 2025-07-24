@@ -10,9 +10,9 @@
         <h2 class="text-success">Daftar Aplikasi</h2>
     </div>
 
-    <div class="d-flex justify-content-start" style="margin-left:85%; margin-bottom: 0.5rem;">
+    <div class="d-flex justify-content-end gap-2 mb-3">
         @can('create-applications')
-        <a href="{{ route('applications.create') }}" class="btn btn-success me-2">
+        <a href="{{ route('applications.create') }}" class="btn btn-success">
             <i class="bi bi-plus-circle me-1"></i>
             Tambah Aplikasi
         </a>
