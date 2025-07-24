@@ -423,7 +423,7 @@
                                 <li>
                                     <a class="dropdown-item d-flex align-items-center" href="{{ route('profile.edit') }}">
                                         <i class="bi bi-person-gear me-2"></i>
-                                        Edit Profile
+                                        Edit Profil
                                     </a>
                                 </li>
                                 <li>
