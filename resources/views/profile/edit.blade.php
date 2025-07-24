@@ -1,8 +1,8 @@
 @extends('layouts.app')
 
-@section('title', 'Edit Profile')
+@section('title', 'Edit Profil')
 
-@section('header-title', 'Edit Profile')
+@section('header-title', 'Edit Profil')
 
 @section('content')
 <div class="container-fluid">
@@ -13,11 +13,11 @@
                 <div class="card-header bg-success text-white">
                     <h5 class="mb-0">
                         <i class="bi bi-person-gear me-2"></i>
-                        Profile Information
+                        Informasi Profil
                     </h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-4">Update your account's profile information and email address.</p>
+                    <p class="text-muted mb-4">Perbarui informasi profil dan alamat email akun Anda.</p>
                     
                     <form method="POST" action="{{ route('profile.update') }}">
                         @csrf
@@ -25,7 +25,7 @@
 
                         <!-- Name Field -->
                         <div class="mb-3">
-                            <label for="name" class="form-label">Name</label>
+                            <label for="name" class="form-label">Nama</label>
                             <input type="text" class="form-control @error('name') is-invalid @enderror" 
                                    id="name" name="name" value="{{ old('name', $user->name) }}" required>
                             @error('name')
@@ -45,9 +45,9 @@
                             @if ($user instanceof \Illuminate\Contracts\Auth\MustVerifyEmail && ! $user->hasVerifiedEmail())
                                 <div class="mt-2">
                                     <p class="text-warning small">
-                                        Your email address is unverified.
+                                        Alamat email Anda belum diverifikasi.
                                         <button form="send-verification" class="btn btn-link p-0 text-decoration-underline small">
-                                            Click here to re-send the verification email.
+                                            Klik di sini untuk mengirim ulang email verifikasi.
                                         </button>
                                     </p>
                                 </div>
@@ -57,18 +57,18 @@
                         <div class="d-flex gap-2">
                             <button type="submit" class="btn btn-success">
                                 <i class="bi bi-check-circle me-1"></i>
-                                Save Changes
+                                Simpan Perubahan
                             </button>
                             <a href="{{ route('dashboard') }}" class="btn btn-secondary">
                                 <i class="bi bi-arrow-left me-1"></i>
-                                Back to Dashboard
+                                Kembali ke Dashboard
                             </a>
                         </div>
 
                         @if (session('status') === 'profile-updated')
                             <div class="alert alert-success mt-3" role="alert">
                                 <i class="bi bi-check-circle-fill me-2"></i>
-                                Profile updated successfully!
+                                Profil berhasil diperbarui!
                             </div>
                         @endif
                     </form>
@@ -80,11 +80,11 @@
                 <div class="card-header bg-warning text-white">
                     <h5 class="mb-0">
                         <i class="bi bi-shield-lock me-2"></i>
-                        Update Password
+                        Perbarui Kata Sandi
                     </h5>
                 </div>
                 <div class="card-body">
-                    <p class="text-muted mb-4">Ensure your account is using a long, random password to stay secure.</p>
+                    <p class="text-muted mb-4">Pastikan akun Anda menggunakan kata sandi yang panjang dan acak agar tetap aman.</p>
                     
                     <form method="POST" action="{{ route('password.update') }}">
                         @csrf
@@ -92,7 +92,7 @@
 
                         <!-- Current Password -->
                         <div class="mb-3">
-                            <label for="current_password" class="form-label">Current Password</label>
+                            <label for="current_password" class="form-label">Kata Sandi Saat Ini</label>
                             <input type="password" class="form-control @error('current_password', 'updatePassword') is-invalid @enderror" 
                                    id="current_password" name="current_password" required>
                             @error('current_password', 'updatePassword')
@@ -102,7 +102,7 @@
 
                         <!-- New Password -->
                         <div class="mb-3">
-                            <label for="password" class="form-label">New Password</label>
+                            <label for="password" class="form-label">Kata Sandi Baru</label>
                             <input type="password" class="form-control @error('password', 'updatePassword') is-invalid @enderror" 
                                    id="password" name="password" required>
                             @error('password', 'updatePassword')
@@ -112,7 +112,7 @@
 
                         <!-- Confirm Password -->
                         <div class="mb-3">
-                            <label for="password_confirmation" class="form-label">Confirm Password</label>
+                            <label for="password_confirmation" class="form-label">Konfirmasi Kata Sandi</label>
                             <input type="password" class="form-control @error('password_confirmation', 'updatePassword') is-invalid @enderror" 
                                    id="password_confirmation" name="password_confirmation" required>
                             @error('password_confirmation', 'updatePassword')
@@ -122,13 +122,13 @@
 
                         <button type="submit" class="btn btn-warning">
                             <i class="bi bi-shield-check me-1"></i>
-                            Update Password
+                            Perbarui Kata Sandi
                         </button>
 
                         @if (session('status') === 'password-updated')
                             <div class="alert alert-success mt-3" role="alert">
                                 <i class="bi bi-check-circle-fill me-2"></i>
-                                Password updated successfully!
+                                Kata sandi berhasil diperbarui!
                             </div>
                         @endif
                     </form>
@@ -140,18 +140,18 @@
                 <div class="card-header bg-danger text-white">
                     <h5 class="mb-0">
                         <i class="bi bi-exclamation-triangle me-2"></i>
-                        Delete Account
+                        Hapus Akun
                     </h5>
                 </div>
                 <div class="card-body">
                     <p class="text-muted mb-4">
-                        Once your account is deleted, all of its resources and data will be permanently deleted. 
-                        Before deleting your account, please download any data or information that you wish to retain.
+                        Setelah akun Anda dihapus, semua sumber daya dan data akan dihapus secara permanen.
+                        Sebelum menghapus akun Anda, silakan unduh data atau informasi yang ingin Anda simpan.
                     </p>
                     
                     <button type="button" class="btn btn-danger" data-bs-toggle="modal" data-bs-target="#confirmDeleteModal">
                         <i class="bi bi-trash me-1"></i>
-                        Delete Account
+                        Hapus Akun
                     </button>
                 </div>
             </div>
@@ -166,9 +166,9 @@
             <div class="modal-header">
                 <h5 class="modal-title" id="confirmDeleteModalLabel">
                     <i class="bi bi-exclamation-triangle text-danger me-2"></i>
-                    Confirm Account Deletion
+                    Konfirmasi Penghapusan Akun
                 </h5>
-                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Tutup"></button>
             </div>
             <form method="POST" action="{{ route('profile.destroy') }}">
                 @csrf
@@ -176,13 +176,13 @@
                 
                 <div class="modal-body">
                     <p class="text-muted mb-3">
-                        Are you sure you want to delete your account? This action cannot be undone.
+                        Apakah Anda yakin ingin menghapus akun Anda? Tindakan ini tidak dapat dibatalkan.
                     </p>
                     
                     <div class="mb-3">
-                        <label for="password_delete" class="form-label">Password</label>
+                        <label for="password_delete" class="form-label">Kata Sandi</label>
                         <input type="password" class="form-control @error('password', 'userDeletion') is-invalid @enderror" 
-                               id="password_delete" name="password" placeholder="Enter your password to confirm" required>
+                               id="password_delete" name="password" placeholder="Masukkan kata sandi Anda untuk konfirmasi" required>
                         @error('password', 'userDeletion')
                             <div class="invalid-feedback">{{ $message }}</div>
                         @enderror
@@ -190,10 +190,10 @@
                 </div>
                 
                 <div class="modal-footer">
-                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Cancel</button>
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Batal</button>
                     <button type="submit" class="btn btn-danger">
                         <i class="bi bi-trash me-1"></i>
-                        Delete Account
+                        Hapus Akun
                     </button>
                 </div>
             </form>
@@ -284,7 +284,7 @@ document.addEventListener('DOMContentLoaded', function() {
     if (passwordField && confirmPasswordField) {
         confirmPasswordField.addEventListener('input', function() {
             if (passwordField.value !== confirmPasswordField.value) {
-                confirmPasswordField.setCustomValidity('Passwords do not match');
+                confirmPasswordField.setCustomValidity('Kata sandi tidak cocok');
             } else {
                 confirmPasswordField.setCustomValidity('');
             }
@@ -299,7 +299,7 @@ document.addEventListener('DOMContentLoaded', function() {
             if (submitBtn) {
                 submitBtn.disabled = true;
                 const originalText = submitBtn.innerHTML;
-                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Processing...';
+                submitBtn.innerHTML = '<span class="spinner-border spinner-border-sm me-2" role="status" aria-hidden="true"></span>Memproses...';
                 
                 // Re-enable after 3 seconds if form doesn't submit
                 setTimeout(() => {

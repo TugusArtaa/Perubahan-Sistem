@@ -25,6 +25,9 @@ class ChangeController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('checkbox', function($row) {
+                    return '<input type="checkbox" class="row-checkbox-changes" value="' . $row->id . '">';
+                })
                 ->addColumn('application_name', function($row) {
                     return $row->application ? $row->application->nama : 'N/A';
                 })
@@ -110,7 +113,7 @@ class ChangeController extends Controller
                             ' . $approvalButtons . '
                         </div>';
                 })
-                ->rawColumns(['tingkat_kepentingan_badge', 'approval_status_badge', 'action', 'approval'])
+                ->rawColumns(['checkbox', 'tingkat_kepentingan_badge', 'approval_status_badge', 'action', 'approval'])
                 ->make(true);
         }
     }
@@ -288,6 +291,33 @@ class ChangeController extends Controller
             }
 
             return redirect()->route('changes.index')->with('error', 'Gagal menolak perubahan.');
+        }
+    }
+
+    // Bulk delete changes
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tidak ada perubahan yang dipilih.'
+            ], 400);
+        }
+
+        try {
+            $count = Change::whereIn('id', $ids)->count();
+            Change::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => "{$count} perubahan berhasil dihapus!"
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus perubahan: ' . $e->getMessage()
+            ], 500);
         }
     }
 }

@@ -39,6 +39,12 @@ Route::middleware(['auth'])->group(function () {
         Route::delete('applications/{application}', [ApplicationController::class, 'destroy'])->name('applications.destroy');
     });
 
+    // Bulk delete route
+    Route::post('applications/bulk-delete', [ApplicationController::class, 'bulkDelete'])->name('applications.bulkDelete');
+
+    // Bulk delete changes route
+    Route::post('changes/bulk-delete', [ChangeController::class, 'bulkDelete'])->name('changes.bulkDelete');
+
     // Change management routes (Protected by permissions)
     Route::middleware(['permission:view-changes'])->group(function () {
         Route::get('/changes-data', [ChangeController::class, 'getChangesData'])->name('changes.data');

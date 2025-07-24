@@ -23,6 +23,9 @@ class ApplicationController extends Controller
 
             return DataTables::of($data)
                 ->addIndexColumn()
+                ->addColumn('checkbox', function($row) {
+                    return '<input type="checkbox" class="row-checkbox" value="' . $row->id . '">';
+                })
                 ->addColumn('no_kepdir', function($row) {
                     return $row->no_kepdir;
                 })
@@ -62,7 +65,7 @@ class ApplicationController extends Controller
                     $actions .= '</div></div>';
                     return $actions;
                 })
-                ->rawColumns(['action'])
+                ->rawColumns(['checkbox', 'action'])
                 ->make(true);
         }
     }
@@ -181,6 +184,33 @@ class ApplicationController extends Controller
             
             return redirect()->route('applications.index')
                 ->with('error', 'Gagal menghapus aplikasi: ' . $e->getMessage());
+        }
+    }
+
+    // Bulk delete applications
+    public function bulkDelete(Request $request)
+    {
+        $ids = $request->input('ids', []);
+        if (empty($ids)) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Tidak ada aplikasi yang dipilih.'
+            ], 400);
+        }
+
+        try {
+            $count = Application::whereIn('id', $ids)->count();
+            Application::whereIn('id', $ids)->delete();
+
+            return response()->json([
+                'success' => true,
+                'message' => "{$count} aplikasi berhasil dihapus!"
+            ]);
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Gagal menghapus aplikasi: ' . $e->getMessage()
+            ], 500);
         }
     }
 }

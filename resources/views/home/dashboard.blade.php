@@ -28,7 +28,7 @@
                         <div class="d-flex gap-2">
                             <a href="{{ route('profile.edit') }}" class="btn btn-outline-success btn-sm">
                                 <i class="bi bi-person-gear me-1"></i>
-                                Edit Profile
+                                Edit Profil
                             </a>
                             <form method="POST" action="{{ route('logout') }}" class="d-inline">
                                 @csrf
